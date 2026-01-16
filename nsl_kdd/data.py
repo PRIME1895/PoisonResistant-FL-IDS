@@ -1,69 +1,80 @@
 from __future__ import annotations
-    return train_path, test_path
-    test_path = root / "KDDTest+.txt"
-    train_path = root / "KDDTrain+.txt"
-    root = Path(project_root)
-def train_test_paths(project_root: str | Path) -> Tuple[Path, Path]:
 
+import csv
+from pathlib import Path
+from typing import Literal, Tuple
 
-    return df
+import pandas as pd
 
-        df["label"] = df["label"].astype(str).str.strip().str.rstrip(".")
-    if "label" in df.columns:
-    # Normalize label strings (some datasets include trailing '.')
-
-        df = df.drop(columns=["difficulty"])
-    if "difficulty" in df.columns:
-
-        df = pd.read_csv(p, header=None, names=names, delim_whitespace=True)
-    else:
-        df = pd.read_csv(p, header=None, names=names)
-    if delim == ",":
-
-    names = make_column_names(n_cols)
-    n_cols = peek_num_columns(p, delim)
-    delim = detect_delimiter(p)
-
-        raise FileNotFoundError(f"File not found: {p}")
-    if not p.exists():
-    p = Path(path)
-
-    """
-    - Drops `difficulty` column when present.
-    - Assigns standard column names if column count matches common NSL-KDD formats.
-    - Auto-detects delimiter (comma vs whitespace).
-
-    """Load a NSL-KDD txt file into a DataFrame.
-def load_nsl_kdd(path: str | Path) -> pd.DataFrame:
-
-
-    return len(first.split())
-        return len(next(csv.reader([first], delimiter=",")))
-    if delimiter == ",":
-
-        first = f.readline().strip()
-    with path.open("r", encoding="utf-8", errors="replace") as f:
-def peek_num_columns(path: Path, delimiter: Delimiter) -> int:
-
-
-    return "," if comma_votes >= max(1, sample_lines // 2) else "whitespace"
-    comma_votes = sum(1 for ln in lines if "," in ln)
-    # If most lines contain commas, assume CSV.
-
-        lines = [next(f).strip() for _ in range(sample_lines)]
-    with path.open("r", encoding="utf-8", errors="replace") as f:
-    """Detect whether a NSL-KDD file is comma-separated or whitespace-separated."""
-def detect_delimiter(path: Path, sample_lines: int = 5) -> Delimiter:
-
+from .schema import make_column_names
 
 Delimiter = Literal[",", "whitespace"]
 
 
-from .schema import make_column_names
+def detect_delimiter(path: Path, sample_lines: int = 5) -> Delimiter:
+    """Detect whether a NSL-KDD file is comma-separated or whitespace-separated."""
+    with path.open("r", encoding="utf-8", errors="replace") as f:
+        lines = []
+        for _ in range(sample_lines):
+            line = f.readline()
+            if not line:
+                break
+            lines.append(line.strip())
 
-import pandas as pd
+    if not lines:
+        # Empty file fallback
+        return "whitespace"
 
-from typing import Literal, Tuple
-from pathlib import Path
-import csv
+    comma_votes = sum(1 for ln in lines if "," in ln)
+    return "," if comma_votes >= max(1, len(lines) // 2) else "whitespace"
 
+
+def peek_num_columns(path: Path, delimiter: Delimiter) -> int:
+    """Read the first row and return the number of columns."""
+    with path.open("r", encoding="utf-8", errors="replace") as f:
+        first = f.readline().strip()
+
+    if not first:
+        return 0
+
+    if delimiter == ",":
+        return len(next(csv.reader([first], delimiter=",")))
+    return len(first.split())
+
+
+def load_nsl_kdd(path: str | Path) -> pd.DataFrame:
+    """Load a NSL-KDD txt file into a DataFrame.
+
+    - Auto-detects delimiter (comma vs whitespace)
+    - Assigns best-effort column names based on detected column count
+    - Drops `difficulty` column when present
+    - Normalizes label strings (strips whitespace and trailing '.')
+    """
+
+    p = Path(path)
+    if not p.exists():
+        raise FileNotFoundError(f"File not found: {p}")
+
+    delim = detect_delimiter(p)
+    n_cols = peek_num_columns(p, delim)
+    names = make_column_names(n_cols)
+
+    if delim == ",":
+        df = pd.read_csv(p, header=None, names=names)
+    else:
+        df = pd.read_csv(p, header=None, names=names, sep=r"\s+", engine="python")
+
+    if "difficulty" in df.columns:
+        df = df.drop(columns=["difficulty"])
+
+    if "label" in df.columns:
+        df["label"] = df["label"].astype(str).str.strip().str.rstrip(".")
+
+    return df
+
+
+def train_test_paths(project_root: str | Path) -> Tuple[Path, Path]:
+    root = Path(project_root)
+    train_path = root / "KDDTrain+.txt"
+    test_path = root / "KDDTest+.txt"
+    return train_path, test_path

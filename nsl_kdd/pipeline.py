@@ -39,9 +39,54 @@ def make_xy(df: pd.DataFrame, *, binary: bool = True) -> Tuple[pd.DataFrame, np.
 
 
 def build_baseline(binary: bool = True) -> Pipeline:
-    # Numeric columns are everything except the known categoricals.
-    def _is_cat(c: str) -> bool:
-        return c in CATEGORICAL_FEATURES
+    # Explicitly choose feature groups.
+    cat_cols = [c for c in CATEGORICAL_FEATURES if c]
+
+    # Numeric selector: everything else (ColumnTransformer requires explicit lists).
+    num_cols = [
+        c
+        for c in [
+            "duration",
+            "src_bytes",
+            "dst_bytes",
+            "land",
+            "wrong_fragment",
+            "urgent",
+            "hot",
+            "num_failed_logins",
+            "logged_in",
+            "num_compromised",
+            "root_shell",
+            "su_attempted",
+            "num_root",
+            "num_file_creations",
+            "num_shells",
+            "num_access_files",
+            "num_outbound_cmds",
+            "is_host_login",
+            "is_guest_login",
+            "count",
+            "srv_count",
+            "serror_rate",
+            "srv_serror_rate",
+            "rerror_rate",
+            "srv_rerror_rate",
+            "same_srv_rate",
+            "diff_srv_rate",
+            "srv_diff_host_rate",
+            "dst_host_count",
+            "dst_host_srv_count",
+            "dst_host_same_srv_rate",
+            "dst_host_diff_srv_rate",
+            "dst_host_same_src_port_rate",
+            "dst_host_srv_diff_host_rate",
+            "dst_host_serror_rate",
+            "dst_host_srv_serror_rate",
+            "dst_host_rerror_rate",
+            "dst_host_srv_rerror_rate",
+        ]
+        if c not in cat_cols
+    ]
 
     preprocessor = ColumnTransformer(
         transformers=[
@@ -53,7 +98,7 @@ def build_baseline(binary: bool = True) -> Pipeline:
                         ("onehot", OneHotEncoder(handle_unknown="ignore")),
                     ]
                 ),
-                [c for c in CATEGORICAL_FEATURES if c],
+                cat_cols,
             ),
             (
                 "num",
@@ -63,16 +108,17 @@ def build_baseline(binary: bool = True) -> Pipeline:
                         ("scaler", StandardScaler()),
                     ]
                 ),
-                "drop" if binary is False else "remainder",
+                num_cols,
             ),
         ],
-        remainder="passthrough",
+        remainder="drop",
     )
 
+    # Logistic Regression is a strong, fast baseline for the binary demo.
     if binary:
-        clf = LogisticRegression(max_iter=200, n_jobs=None)
+        clf = LogisticRegression(max_iter=300)
     else:
-        clf = LogisticRegression(max_iter=200, n_jobs=None, multi_class="auto")
+        clf = LogisticRegression(max_iter=300, multi_class="auto")
 
     return Pipeline(steps=[("prep", preprocessor), ("clf", clf)])
 
