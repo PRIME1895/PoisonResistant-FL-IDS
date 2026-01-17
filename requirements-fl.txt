@@ -1,0 +1,10 @@
+# Optional requirements for Phase 4–5 (PyTorch FedAvg)
+# Install torch using the official selector to match your OS/CUDA:
+# https://pytorch.org/get-started/locally/
+#
+# Example (CUDA 12.6, Windows):
+# pip install torch --index-url https://download.pytorch.org/whl/cu126
+#
+# This file is intentionally small so the core project stays lightweight.
+
+torch

@@ -4,6 +4,8 @@ import argparse
 import json
 from pathlib import Path
 
+import pandas as pd
+
 from nsl_kdd.data import load_nsl_kdd, train_test_paths
 from nsl_kdd.federated import DEFAULT_5_CLIENT_SPECS, family_distribution, split_non_iid
 from nsl_kdd.pipeline import train_and_eval
@@ -89,6 +91,49 @@ def cmd_split_clients(project_root: Path, *, out: str, n_clients: int, client_si
     return 0
 
 
+def cmd_fl_train(project_root: Path, *, clients_dir: str, rounds: int, local_epochs: int, batch_size: int, lr: float, device: str, seed: int) -> int:
+    # Lazy import so `torch` is optional unless you run this command.
+    from nsl_kdd.torch_fl import FLConfig, train_fedavg_binary
+
+    clients_path = (project_root / clients_dir).resolve()
+    if not clients_path.exists() or not clients_path.is_dir():
+        raise SystemExit(f"Clients dir not found: {clients_path}. Run `python main.py split-clients` first.")
+
+    client_files = sorted(clients_path.glob("client_*.csv"))
+    if not client_files:
+        raise SystemExit(f"No client CSVs found in: {clients_path}")
+
+    client_dfs = [pd.read_csv(p) for p in client_files]
+
+    # Load test set from the canonical NSL-KDD file.
+    _, test_path = train_test_paths(project_root)
+    test_df = load_nsl_kdd(test_path)
+
+    cfg = FLConfig(
+        rounds=rounds,
+        local_epochs=local_epochs,
+        batch_size=batch_size,
+        lr=lr,
+        device=device,
+        seed=seed,
+    )
+
+    result = train_fedavg_binary(client_dfs, test_df, config=cfg)
+
+    print("FedAvg (PyTorch) final metrics:")
+    for k, v in result.metrics.items():
+        if k == "round":
+            continue
+        print(f"{k}: {v:.4f}")
+
+    print("\nRound history:")
+    for row in result.history:
+        r = int(row.get("round", 0))
+        print(f"- round {r}: acc={row['accuracy']:.4f}, f1={row['f1']:.4f}, prec={row['precision']:.4f}, rec={row['recall']:.4f}")
+
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="NSL-KDD baseline loader + trainer")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -103,6 +148,15 @@ def build_parser() -> argparse.ArgumentParser:
     split_p.add_argument("--n-clients", type=int, default=5, help="Number of clients (default: 5)")
     split_p.add_argument("--client-size", type=int, default=20000, help="Rows per client (default: 20000)")
     split_p.add_argument("--seed", type=int, default=1337, help="RNG seed")
+
+    fl_p = sub.add_parser("fl-train", help="Run a simple PyTorch FedAvg simulation over client CSVs")
+    fl_p.add_argument("--clients-dir", default="data/clients", help="Directory containing client_*.csv (default: data/clients)")
+    fl_p.add_argument("--rounds", type=int, default=5, help="Federated rounds (default: 5)")
+    fl_p.add_argument("--local-epochs", type=int, default=1, help="Local epochs per client per round (default: 1)")
+    fl_p.add_argument("--batch-size", type=int, default=256, help="Batch size (default: 256)")
+    fl_p.add_argument("--lr", type=float, default=1e-3, help="Learning rate (default: 1e-3)")
+    fl_p.add_argument("--device", default="cpu", help="Torch device, e.g. cpu or cuda (default: cpu)")
+    fl_p.add_argument("--seed", type=int, default=1337, help="RNG seed")
 
     return p
 
@@ -123,6 +177,18 @@ def main() -> int:
             out=str(args.out),
             n_clients=int(args.n_clients),
             client_size=int(args.client_size),
+            seed=int(args.seed),
+        )
+
+    if args.cmd == "fl-train":
+        return cmd_fl_train(
+            project_root,
+            clients_dir=str(args.clients_dir),
+            rounds=int(args.rounds),
+            local_epochs=int(args.local_epochs),
+            batch_size=int(args.batch_size),
+            lr=float(args.lr),
+            device=str(args.device),
             seed=int(args.seed),
         )
 

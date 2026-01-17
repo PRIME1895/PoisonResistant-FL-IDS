@@ -2,3 +2,13 @@ numpy>=1.23
 pandas>=2.0
 scikit-learn>=1.3
 pytest>=7.0
+
+# PyTorch note:
+# - A requirements.txt file cannot "import global site-packages".
+# - If torch is installed globally but not visible inside your .venv, you have 2 options:
+#   (A) Create/use a venv that inherits system site-packages:
+#       python -m venv .venv --system-site-packages
+#       (or in PyCharm: Interpreter settings -> "Inherit global site-packages")
+#   (B) Install PyTorch into the venv (recommended for reproducibility):
+#       pip install -r requirements-fl.txt
+#       (See https://pytorch.org/get-started/locally/ for the right torch build)
