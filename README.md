@@ -172,6 +172,36 @@ For your report/viva, you should compare these scenarios:
 
 ---
 
+## Plots (3 research‑grade figures)
+Use the local run logs (`runs/<run_id>/rounds.json` or `runs.csv`) to generate the three key plots:
+
+### Plot 1 — Accuracy vs FL Rounds
+Shows learning progression and compares:
+- Phase 5: Clean FedAvg
+- Phase 6: FedAvg + Poisoning
+- Phase 7: Poisoning‑Resistant FL
+
+### Plot 2 — Recall vs FL Rounds (IDS priority)
+Recall is critical in IDS because false negatives mean missed attacks.
+This plot shows poisoning increasing missed attacks and the defense reducing them.
+
+### Plot 3 — Trust/Defense signal vs FL Rounds (Phase 7 only)
+Shows the defense is active and interpretable (e.g., `trust_mean`, `cosine_sim_mean`, or `dropped_clients`).
+
+### Generate plots
+After you have 3 runs saved locally (clean/poisoned/defended), run:
+
+```powershell
+python main.py plot --clean runs/20260121_171404 --poisoned runs/20260121_171406 --defended runs/20260121_171407 --out-dir figures
+```
+
+Output:
+- `figures/plot1_accuracy_vs_rounds.png`
+- `figures/plot2_recall_vs_rounds.png`
+- `figures/plot3_defense_signal_vs_rounds.png`
+
+---
+
 ## Tests
 ```powershell
 pytest
@@ -187,4 +217,3 @@ Please cite:
 
 Dataset reference/download:
 - https://www.unb.ca/cic/datasets/nsl.html
-

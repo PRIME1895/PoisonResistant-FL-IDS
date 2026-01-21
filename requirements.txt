@@ -5,6 +5,9 @@ pytest>=7.0
 
 tqdm>=4.66
 python-dotenv>=1.0
+matplotlib>=3.8
+
+# (Optional/legacy) Mongo dependencies can be removed if you don't use MongoDB
 pymongo>=4.6
 # Required for mongodb+srv:// connection strings
 # (May already exist in global site-packages if your venv inherits them.)

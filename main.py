@@ -211,6 +211,30 @@ def cmd_fl_train(
     return 0
 
 
+def cmd_plot(
+    project_root: Path,
+    *,
+    clean: str,
+    poisoned: str,
+    defended: str,
+    out_dir: str,
+) -> int:
+    from nsl_kdd.plots import generate_core_plots
+
+    written = generate_core_plots(
+        clean_run=(project_root / clean).resolve() if not Path(clean).is_absolute() else Path(clean),
+        poisoned_run=(project_root / poisoned).resolve() if not Path(poisoned).is_absolute() else Path(poisoned),
+        defended_run=(project_root / defended).resolve() if not Path(defended).is_absolute() else Path(defended),
+        out_dir=(project_root / out_dir).resolve() if not Path(out_dir).is_absolute() else Path(out_dir),
+    )
+
+    print("Wrote plots:")
+    for p in written:
+        print(f"- {p}")
+
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="NSL-KDD baseline loader + trainer")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -294,6 +318,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="(aggregation=cosine) Trust weight for cross-layer consistency term (default: 0.5)",
     )
 
+    plot_p = sub.add_parser("plot", help="Generate 3 research-grade plots from local run logs")
+    plot_p.add_argument("--clean", required=True, help="Path to clean FedAvg run dir (e.g., runs/<id>)")
+    plot_p.add_argument("--poisoned", required=True, help="Path to poisoned FedAvg run dir (e.g., runs/<id>)")
+    plot_p.add_argument("--defended", required=True, help="Path to defended run dir (e.g., runs/<id>)")
+    plot_p.add_argument("--out-dir", default="figures", help="Output directory for PNGs (default: figures)")
+
     return p
 
 
@@ -337,6 +367,15 @@ def main() -> int:
             trust_alpha=float(args.trust_alpha),
             trust_beta=float(args.trust_beta),
             trust_gamma=float(args.trust_gamma),
+        )
+
+    if args.cmd == "plot":
+        return cmd_plot(
+            project_root,
+            clean=str(args.clean),
+            poisoned=str(args.poisoned),
+            defended=str(args.defended),
+            out_dir=str(args.out_dir),
         )
 
     raise SystemExit("Unknown command")

@@ -19,3 +19,8 @@ Thumbs.db
 
 # Local run outputs
 runs/
+
+# Generated plots
+figures/
+*.png
+
