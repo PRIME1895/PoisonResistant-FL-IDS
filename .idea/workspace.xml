@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="213e15c2-7a6a-4bff-a539-f912c47af212" name="Changes" comment="Add attack family helpers and federated client splitting utilities for NSL-KDD dataset">
-      <change afterPath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements-fl.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_torch_fl_smoke.py" afterDir="false" />
+    <list default="true" id="213e15c2-7a6a-4bff-a539-f912c47af212" name="Changes" comment="Add PyTorch FedAvg training command and update README with usage instructions">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nsl_kdd/local_logger.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nsl_kdd/mongo_logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" beforeDir="false" afterPath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_torch_fl_smoke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_torch_fl_smoke.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +86,10 @@
       <updated>1768537212411</updated>
       <workItem from="1768537213455" duration="817000" />
       <workItem from="1768628377493" duration="502000" />
-      <workItem from="1768628892781" duration="1509000" />
+      <workItem from="1768628892781" duration="1987000" />
+      <workItem from="1768631018049" duration="5000" />
+      <workItem from="1768711288616" duration="52000" />
+      <workItem from="1769003333987" duration="8950000" />
     </task>
     <task id="LOCAL-00001" summary="Add project configuration files for Poisoning-Resistant Cross-Layer Federated Intrusion Detection System (FL-IDS)">
       <option name="closed" value="true" />
@@ -125,7 +131,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768629706949</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add PyTorch FedAvg training command and update README with usage instructions">
+      <option name="closed" value="true" />
+      <created>1768630433800</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1768630433800</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add PyTorch FedAvg training command and update README with usage instructions">
+      <option name="closed" value="true" />
+      <created>1768630798801</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1768630798801</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,7 +158,8 @@
     <MESSAGE value="Refactor data loading functions for NSL-KDD dataset and enhance pipeline feature selection" />
     <MESSAGE value="Add data loading and preprocessing modules for NSL-KDD dataset" />
     <MESSAGE value="Add attack family helpers and federated client splitting utilities for NSL-KDD dataset" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add attack family helpers and federated client splitting utilities for NSL-KDD dataset" />
+    <MESSAGE value="Add PyTorch FedAvg training command and update README with usage instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add PyTorch FedAvg training command and update README with usage instructions" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PoisoningResistant_CrossLayer_Federated_Intrusion_Detection_System__FLIDS_$load_data.coverage" NAME="load_data Coverage Results" MODIFIED="1768628715896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />

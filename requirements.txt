@@ -3,6 +3,13 @@ pandas>=2.0
 scikit-learn>=1.3
 pytest>=7.0
 
+tqdm>=4.66
+python-dotenv>=1.0
+pymongo>=4.6
+# Required for mongodb+srv:// connection strings
+# (May already exist in global site-packages if your venv inherits them.)
+dnspython>=2.6.1
+
 # PyTorch note:
 # - A requirements.txt file cannot "import global site-packages".
 # - If torch is installed globally but not visible inside your .venv, you have 2 options:

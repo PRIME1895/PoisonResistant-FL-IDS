@@ -11,6 +11,31 @@ from nsl_kdd.federated import DEFAULT_5_CLIENT_SPECS, family_distribution, split
 from nsl_kdd.pipeline import train_and_eval
 
 
+def _load_env(project_root: Path) -> None:
+    """Best-effort load of .env so local runs can enable Mongo logging easily."""
+
+    try:
+        from dotenv import load_dotenv
+
+        load_dotenv(dotenv_path=project_root / ".env", override=False)
+    except Exception:
+        # Optional convenience only.
+        return
+
+
+def _parse_int_list(csv: str) -> list[int]:
+    s = str(csv).strip()
+    if not s:
+        return []
+    out: list[int] = []
+    for part in s.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        out.append(int(part))
+    return out
+
+
 def cmd_verify(project_root: Path) -> int:
     train_path, test_path = train_test_paths(project_root)
 
@@ -91,7 +116,26 @@ def cmd_split_clients(project_root: Path, *, out: str, n_clients: int, client_si
     return 0
 
 
-def cmd_fl_train(project_root: Path, *, clients_dir: str, rounds: int, local_epochs: int, batch_size: int, lr: float, device: str, seed: int) -> int:
+def cmd_fl_train(
+    project_root: Path,
+    *,
+    clients_dir: str,
+    rounds: int,
+    local_epochs: int,
+    batch_size: int,
+    lr: float,
+    device: str,
+    seed: int,
+    malicious_clients: str,
+    label_flip_rate: float,
+    aggregation: str,
+    cosine_drop_k: int,
+    clip_norm: float | None,
+    trim_ratio: float,
+    trust_alpha: float,
+    trust_beta: float,
+    trust_gamma: float,
+) -> int:
     # Lazy import so `torch` is optional unless you run this command.
     from nsl_kdd.torch_fl import FLConfig, train_fedavg_binary
 
@@ -109,6 +153,8 @@ def cmd_fl_train(project_root: Path, *, clients_dir: str, rounds: int, local_epo
     _, test_path = train_test_paths(project_root)
     test_df = load_nsl_kdd(test_path)
 
+    mc = tuple(_parse_int_list(malicious_clients))
+
     cfg = FLConfig(
         rounds=rounds,
         local_epochs=local_epochs,
@@ -116,11 +162,28 @@ def cmd_fl_train(project_root: Path, *, clients_dir: str, rounds: int, local_epo
         lr=lr,
         device=device,
         seed=seed,
+        malicious_clients=mc,
+        label_flip_rate=float(label_flip_rate),
+        aggregation=str(aggregation),
+        cosine_drop_k=int(cosine_drop_k),
+        clip_norm=clip_norm,
+        trim_ratio=float(trim_ratio),
+        trust_alpha=float(trust_alpha),
+        trust_beta=float(trust_beta),
+        trust_gamma=float(trust_gamma),
     )
 
     result = train_fedavg_binary(client_dfs, test_df, config=cfg)
 
-    print("FedAvg (PyTorch) final metrics:")
+    print(f"FL config: aggregation={cfg.aggregation}, malicious={list(cfg.malicious_clients)}, flip_rate={cfg.label_flip_rate}")
+    if cfg.aggregation == "cosine":
+        print(f"- cosine_drop_k={cfg.cosine_drop_k}")
+    if cfg.clip_norm is not None:
+        print(f"- clip_norm={cfg.clip_norm}")
+    if cfg.aggregation in {"trimmed_mean", "median"}:
+        print(f"- trim_ratio={cfg.trim_ratio}")
+
+    print("\nFedAvg/Robust-FL final metrics:")
     for k, v in result.metrics.items():
         if k == "round":
             continue
@@ -129,7 +192,21 @@ def cmd_fl_train(project_root: Path, *, clients_dir: str, rounds: int, local_epo
     print("\nRound history:")
     for row in result.history:
         r = int(row.get("round", 0))
-        print(f"- round {r}: acc={row['accuracy']:.4f}, f1={row['f1']:.4f}, prec={row['precision']:.4f}, rec={row['recall']:.4f}")
+        extra = []
+        if "cosine_sim_mean" in row:
+            extra.append(f"cos={row['cosine_sim_mean']:.3f}")
+        if "trust_mean" in row:
+            extra.append(f"trust={row['trust_mean']:.3f}")
+        if "loss_stability_mean" in row:
+            extra.append(f"lossStab={row['loss_stability_mean']:.3f}")
+        if "cross_layer_mean" in row:
+            extra.append(f"xLayer={row['cross_layer_mean']:.3f}")
+        if "dropped_clients" in row:
+            extra.append(f"dropped={int(row['dropped_clients'])}")
+        extra_s = f" ({', '.join(extra)})" if extra else ""
+        print(
+            f"- round {r}: acc={row['accuracy']:.4f}, f1={row['f1']:.4f}, prec={row['precision']:.4f}, rec={row['recall']:.4f}{extra_s}"
+        )
 
     return 0
 
@@ -149,7 +226,7 @@ def build_parser() -> argparse.ArgumentParser:
     split_p.add_argument("--client-size", type=int, default=20000, help="Rows per client (default: 20000)")
     split_p.add_argument("--seed", type=int, default=1337, help="RNG seed")
 
-    fl_p = sub.add_parser("fl-train", help="Run a simple PyTorch FedAvg simulation over client CSVs")
+    fl_p = sub.add_parser("fl-train", help="Run a simple PyTorch FL simulation over client CSVs")
     fl_p.add_argument("--clients-dir", default="data/clients", help="Directory containing client_*.csv (default: data/clients)")
     fl_p.add_argument("--rounds", type=int, default=5, help="Federated rounds (default: 5)")
     fl_p.add_argument("--local-epochs", type=int, default=1, help="Local epochs per client per round (default: 1)")
@@ -158,12 +235,73 @@ def build_parser() -> argparse.ArgumentParser:
     fl_p.add_argument("--device", default="cpu", help="Torch device, e.g. cpu or cuda (default: cpu)")
     fl_p.add_argument("--seed", type=int, default=1337, help="RNG seed")
 
+    # Phase 6: poisoning
+    fl_p.add_argument(
+        "--malicious-clients",
+        default="",
+        help="Comma-separated 1-based client indices to poison, e.g. '2' or '2,5' (default: none)",
+    )
+    fl_p.add_argument(
+        "--label-flip-rate",
+        type=float,
+        default=0.0,
+        help="Fraction of labels to flip for malicious clients (0..1). Default: 0 (no poisoning).",
+    )
+
+    # Phase 7: defenses
+    fl_p.add_argument(
+        "--aggregation",
+        default="fedavg",
+        choices=["fedavg", "cosine", "trimmed_mean", "median"],
+        help="Aggregation/defense strategy (default: fedavg)",
+    )
+    fl_p.add_argument(
+        "--cosine-drop-k",
+        type=int,
+        default=0,
+        help="(aggregation=cosine) Drop K lowest-similarity client updates per round (default: 0)",
+    )
+    fl_p.add_argument(
+        "--clip-norm",
+        type=float,
+        default=None,
+        help="Clip each client update by this L2 norm before aggregation (default: None)",
+    )
+    fl_p.add_argument(
+        "--trim-ratio",
+        type=float,
+        default=0.2,
+        help="(aggregation=trimmed_mean) Coordinate-wise trim ratio in [0,0.49] (default: 0.2)",
+    )
+
+    # Phase 7: trust score weights (only used for aggregation=cosine)
+    fl_p.add_argument(
+        "--trust-alpha",
+        type=float,
+        default=1.0,
+        help="(aggregation=cosine) Trust weight for cosine similarity term (default: 1.0)",
+    )
+    fl_p.add_argument(
+        "--trust-beta",
+        type=float,
+        default=0.0,
+        help="(aggregation=cosine) Trust weight for loss stability term (default: 0.0)",
+    )
+    fl_p.add_argument(
+        "--trust-gamma",
+        type=float,
+        default=0.5,
+        help="(aggregation=cosine) Trust weight for cross-layer consistency term (default: 0.5)",
+    )
+
     return p
 
 
 def main() -> int:
     args = build_parser().parse_args()
     project_root = Path(__file__).resolve().parent
+
+    _load_env(project_root)
 
     if args.cmd == "verify":
         return cmd_verify(project_root)
@@ -190,6 +328,15 @@ def main() -> int:
             lr=float(args.lr),
             device=str(args.device),
             seed=int(args.seed),
+            malicious_clients=str(args.malicious_clients),
+            label_flip_rate=float(args.label_flip_rate),
+            aggregation=str(args.aggregation),
+            cosine_drop_k=int(args.cosine_drop_k),
+            clip_norm=(float(args.clip_norm) if args.clip_norm is not None else None),
+            trim_ratio=float(args.trim_ratio),
+            trust_alpha=float(args.trust_alpha),
+            trust_beta=float(args.trust_beta),
+            trust_gamma=float(args.trust_gamma),
         )
 
     raise SystemExit("Unknown command")
