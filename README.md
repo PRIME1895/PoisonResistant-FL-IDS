@@ -192,13 +192,34 @@ Shows the defense is active and interpretable (e.g., `trust_mean`, `cosine_sim_m
 After you have 3 runs saved locally (clean/poisoned/defended), run:
 
 ```powershell
-python main.py plot --clean runs/20260121_171404 --poisoned runs/20260121_171406 --defended runs/20260121_171407 --out-dir figures
+python main.py plot --clean "runs/binary_model(clean)" --poisoned "runs/binary_model(poisoned)" --defended "runs/binary_model(defended)" --out-dir figures
 ```
 
 Output:
 - `figures/plot1_accuracy_vs_rounds.png`
 - `figures/plot2_recall_vs_rounds.png`
 - `figures/plot3_defense_signal_vs_rounds.png`
+
+---
+
+## Multi-run comparison (all scenarios in one plot)
+If you have the 6 scenario folders under `runs/` (from centralized baseline through robust defenses), you can generate:
+- **One single comparison plot** with all runs overlaid
+- **One merged metrics file** containing every round’s metrics from every run
+
+Run:
+
+```powershell
+python -m nsl_kdd.compare_runs
+```
+
+Outputs:
+- `figures/comparison/comparison_accuracy.png` (all scenarios: accuracy vs rounds)
+- `figures/comparison/comparison_recall.png` (all scenarios: recall vs rounds)
+- `figures/comparison/all_round_metrics.json`
+- `figures/comparison/all_round_metrics.csv`
+
+The merged metrics files contain a `run_name` column so you can filter/group by scenario.
 
 ---
 
