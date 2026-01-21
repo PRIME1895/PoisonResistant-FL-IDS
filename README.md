@@ -20,122 +20,95 @@ But FL introduces a new threat: **poisoning attacks** (malicious clients send ha
 
 ---
 
-## Tool stack (your stack)
-- **Development:** PyCharm Pro
-- **Deployment (later phase):** Heroku
-- **Monitoring (later phase):** Datadog
-- **Diagrams (optional):** ToDiagram / Visme
+## Research motivation (why this is important)
+Existing Federated Learning–based IDS often assume honest participating clients, which is unrealistic in adversarial network environments.
+
+Known gaps this project addresses:
+- **Poisoning/backdoor attacks** can severely degrade FL‑IDS performance.
+- Many defenses are **generic FL security** and not tailored to IDS needs.
+- Prior FL‑IDS defenses often lack **cross‑layer validation**, making it harder to distinguish real traffic anomalies from malicious client updates.
+- There is limited work on **trust‑aware aggregation** that dynamically evaluates client reliability during federated training.
+
+This repo is built to demonstrate those issues and implement a practical defense you can explain and measure.
 
 ---
 
-## Repo features
-### Dataset & preprocessing
-- Robust NSL‑KDD loader (`KDDTrain+.txt`, `KDDTest+.txt`)
-- Drops difficulty column when present
-- One‑hot encoding: `protocol_type`, `service`, `flag`
-- Standard scaling for numeric columns
-- Binary labels: `normal → 0`, `attack → 1`
+## Implementation phases (mapped to the repo)
+These phases match the methodology-style roadmap used in the project.
 
-### Federated learning simulation
-- Non‑IID split into 5 realistic clients (normal / DoS / probe / rare attacks)
-- PyTorch MLP client model
-- FedAvg baseline
+### Phase 1 — Dataset setup (NSL‑KDD)
+**Input:** `KDDTrain+.txt`, `KDDTest+.txt` (in project root)
 
-### Poisoning + defenses
-- **Phase 6:** Label‑flipping poisoning on selected clients
-- **Phase 7 Option A:** Cosine similarity trust weighting + optional outlier drop
-  - Trust score combines:
-    - cosine similarity of updates
-    - loss stability
-    - cross‑layer consistency
-- **Phase 7 Option B:** Update clipping + robust aggregation
-  - trimmed mean
-  - coordinate median
+What happens:
+- File loading supports common NSL‑KDD formatting.
+- Drops the difficulty column when present.
 
-### Phase 8 logging
-- Local experiment logging (runs/ folder)
-
----
-
-## Project structure (high level)
-- `main.py` — CLI entry point (verify/train/split-clients/fl-train)
-- `nsl_kdd/` — dataset loading + FL simulation (+ local experiment logger)
-- `preprocessing/` — feature preprocessing pipeline
-- `data/clients/` — generated client CSVs + `manifest.json`
-- `tests/` — pytest suite
-
----
-
-## Dataset files (required)
-Place these files in the project root (same folder as `main.py`):
-- `KDDTrain+.txt`
-- `KDDTest+.txt`
-
----
-
-## Setup
-```powershell
-python -m pip install -r requirements.txt
-```
-
-### PyTorch note (GPU / global torch)
-This repo imports torch only when you run `fl-train`. If you already installed **torch+CUDA globally**, make sure your PyCharm `.venv` is configured to **inherit global site‑packages**.
-
----
-
-## Quickstart (recommended demo path)
-These steps reproduce the clean end‑to‑end pipeline.
-
-### 1) Verify dataset
+CLI:
 ```powershell
 python main.py verify
 ```
 
-### 2) Train a centralized baseline (binary)
+### Phase 2 — Preprocessing (binary IDS features)
+What happens:
+- One‑hot encoding: `protocol_type`, `service`, `flag`
+- Standard scaling for numeric features
+- Binary labels: `normal → 0`, `attack → 1`
+
+CLI:
 ```powershell
 python main.py train --binary
 ```
 
-### 3) Create 5 non‑IID federated clients
-Recommended for fast + strong metrics in demos:
+### Phase 3 — Federated environment simulation (non‑IID clients)
+What happens:
+- The NSL‑KDD training set is split into **5 non‑IID clients** with different attack‑family mixtures.
 
+Recommended demo split:
 ```powershell
 python main.py split-clients --client-size 2000 --seed 42
 ```
 
-*(You can increase `--client-size` later for heavier experiments, but 2000 is a great “demo sweet spot”.)*
+Outputs:
+- `data/clients/client_1.csv` … `client_5.csv`
+- `data/clients/manifest.json`
 
-### 4) Run Federated Learning (baseline FedAvg)
+### Phase 4 — Local IDS model (client‑side)
+What happens:
+- Each client trains a small PyTorch MLP locally.
+
+### Phase 5 — Baseline Federated Learning (FedAvg)
+Goal:
+- Establish baseline FL performance before attacks.
+
+CLI:
 ```powershell
 python main.py fl-train --rounds 5 --local-epochs 1 --device cpu --seed 42 --aggregation fedavg
 ```
 
----
+### Phase 6 — Poisoning attack (label flipping)
+Goal:
+- Show the degradation under malicious clients.
 
-## Phase 6 — Poisoning attack (label flipping)
-Flip labels for one or more malicious clients.
-
-Example: poison client 2 by flipping 50% of its labels:
-
+CLI example (poison client 2):
 ```powershell
 python main.py fl-train --rounds 5 --local-epochs 1 --device cpu --seed 42 --malicious-clients 2 --label-flip-rate 0.5 --aggregation fedavg
 ```
 
----
+### Phase 7 — Poisoning‑resistant defenses (core contribution)
+Two defense options are implemented.
 
-## Phase 7 — Poisoning‑resistant defenses
-
-### Option A: Cross‑layer trust weighting (cosine) + outlier drop
-Trust score (per client update):
-- cosine similarity
+#### Option A (recommended): Trust‑aware aggregation with cross‑layer validation
+Trust score combines:
+- cosine similarity of client updates
 - loss stability
-- cross‑layer consistency
+- cross‑layer consistency (network/transport/application feature groups)
 
+CLI example:
 ```powershell
 python main.py fl-train --rounds 5 --local-epochs 1 --device cpu --seed 42 --malicious-clients 2 --label-flip-rate 0.5 --aggregation cosine --cosine-drop-k 1 --trust-alpha 1.0 --trust-beta 0.5 --trust-gamma 0.5
 ```
 
-### Option B: Clipping + robust aggregation
+#### Option B: Robust aggregation (clipping + robust reducer)
 Trimmed mean:
 ```powershell
 python main.py fl-train --rounds 5 --local-epochs 1 --device cpu --seed 42 --malicious-clients 2 --label-flip-rate 0.5 --aggregation trimmed_mean --clip-norm 5 --trim-ratio 0.2
@@ -146,29 +119,23 @@ Coordinate median:
 python main.py fl-train --rounds 5 --local-epochs 1 --device cpu --seed 42 --malicious-clients 2 --label-flip-rate 0.5 --aggregation median --clip-norm 5
 ```
 
+### Phase 8 — Local experiment logging (reproducibility)
+Every `fl-train` run stores metrics locally under `runs/<run_id>/`:
+- `run.json` — run config + metadata
+- `rounds.json` — per-round metrics in JSON
+- `rounds.csv` — per-round metrics in CSV (Excel friendly)
+
 ---
 
-## Phase 8 — Local experiment logging (recommended)
-Every time you run `fl-train`, this repo automatically saves the generated metrics **locally** (no external services needed).
+## Repo features
+(Quick summary — detailed steps are in **Implementation phases** above.)
 
-### Where files are saved
-A new folder will be created:
-- `runs/<run_id>/run.json` — run config + metadata
-- `runs/<run_id>/rounds.json` — per-round metrics (JSON)
-- `runs/<run_id>/rounds.csv` — per-round metrics (CSV)
-
-`rounds.csv` is the easiest to open quickly in Excel.
-
-### Example
-Run your experiment (any aggregation/poisoning settings):
-
-```powershell
-python main.py split-clients --client-size 2000 --seed 42
-python main.py fl-train --rounds 1 --local-epochs 1 --device cpu --seed 42 --malicious-clients 2 --label-flip-rate 0.5 --aggregation cosine --cosine-drop-k 1 --trust-alpha 1.0 --trust-beta 0.5 --trust-gamma 0.5
-```
-
-Then open:
-- `runs/<latest_run_id>/rounds.csv`
+- Dataset loading + preprocessing (binary IDS)
+- Non‑IID client simulation
+- Baseline FL (FedAvg)
+- Poisoning (label flipping)
+- Poisoning‑resistant aggregation (trust‑aware + robust)
+- Local run logging (`runs/`)
 
 ---
 
