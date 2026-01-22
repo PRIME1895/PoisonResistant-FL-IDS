@@ -3,9 +3,9 @@
 A practical, demo‑ready **Federated Learning Intrusion Detection System (FL‑IDS)** built on the **NSL‑KDD** dataset.
 
 This repo is designed for a strong viva/demo:
-- You can run a clean **baseline FL** experiment.
-- You can simulate **label‑flipping poisoning**.
-- You can defend using **cross‑layer trust scoring** (cosine similarity + loss stability + cross‑layer consistency) and robust aggregation.
+- Run a clean **baseline FL** experiment.
+- Simulate **label‑flipping poisoning**.
+- Defend using **cross‑layer trust scoring** (cosine similarity + loss stability + cross‑layer consistency) and robust aggregation.
 - Every run automatically logs round metrics **locally** into the `runs/` folder.
 
 ---
@@ -29,8 +29,6 @@ Known gaps this project addresses:
 - Prior FL‑IDS defenses often lack **cross‑layer validation**, making it harder to distinguish real traffic anomalies from malicious client updates.
 - There is limited work on **trust‑aware aggregation** that dynamically evaluates client reliability during federated training.
 
-This repo is built to demonstrate those issues and implement a practical defense you can explain and measure.
-
 ---
 
 ## Implementation phases (mapped to the repo)
@@ -40,18 +38,18 @@ These phases match the methodology-style roadmap used in the project.
 **Input:** `KDDTrain+.txt`, `KDDTest+.txt` (in project root)
 
 What happens:
-- File loading supports common NSL‑KDD formatting.
-- Drops the difficulty column when present.
+- Auto-detects delimiter (comma vs whitespace)
+- Assigns column names (best-effort)
+- Drops the difficulty column when present
 
 CLI:
 ```powershell
 python main.py verify
 ```
 
-### Phase 2 — Preprocessing (binary IDS features)
+### Phase 2 — Baseline centralized training (sanity check)
 What happens:
-- One‑hot encoding: `protocol_type`, `service`, `flag`
-- Standard scaling for numeric features
+- Baseline sklearn model (fast sanity check)
 - Binary labels: `normal → 0`, `attack → 1`
 
 CLI:
@@ -59,40 +57,51 @@ CLI:
 python main.py train --binary
 ```
 
-### Phase 3 — Federated environment simulation (non‑IID clients)
+### Phase 3 — Preprocessing (binary IDS features)
 What happens:
-- The NSL‑KDD training set is split into **5 non‑IID clients** with different attack‑family mixtures.
+- One‑hot encoding: `protocol_type`, `service`, `flag`
+- Standard scaling for numeric features
+- Binary labels: `normal → 0`, `attack → 1`
 
-Recommended demo split:
+> Note: In the FL pipeline this preprocessing is fit once on the union of client data
+> (equivalent to global train), then applied consistently to all clients + test.
+
+### Phase 4 — Federated environment simulation (non‑IID clients)
+What happens:
+- The NSL‑KDD training set is split into **non‑IID clients** with different attack‑family mixtures.
+
+Recommended demo split (2k rows/client works well and runs fast):
 ```powershell
 python main.py split-clients --client-size 2000 --seed 42
 ```
 
 Outputs:
 - `data/clients/client_1.csv` … `client_5.csv`
-- `data/clients/manifest.json`
+- `data/clients/manifest.json` (family distributions)
 
-### Phase 4 — Local IDS model (client‑side)
+### Phase 5 — Local IDS model (client‑side)
 What happens:
-- Each client trains a small PyTorch MLP locally.
+- Each client trains a small PyTorch MLP locally (binary classification).
+- Only model updates are aggregated (raw client data never leaves the client).
 
-### Phase 5 — Baseline Federated Learning (FedAvg)
-Goal:
-- Establish baseline FL performance before attacks.
-
+### Phase 6 — Federated Learning experiments (baseline + poisoning)
+#### Phase 6A — Clean FedAvg (baseline)
 CLI:
 ```powershell
 python main.py fl-train --rounds 5 --local-epochs 1 --device cpu --seed 42 --aggregation fedavg
 ```
 
-### Phase 6 — Poisoning attack (label flipping)
-Goal:
-- Show the degradation under malicious clients.
-
-CLI example (poison client 2):
+#### Phase 6B — FedAvg + Poisoning (label flipping)
+CLI example (poison **client 2**):
 ```powershell
 python main.py fl-train --rounds 5 --local-epochs 1 --device cpu --seed 42 --malicious-clients 2 --label-flip-rate 0.5 --aggregation fedavg
 ```
+
+**Which clients are poisoned?**
+- Poisoning is controlled by `--malicious-clients`, which takes **1-based client indices** corresponding to files in `data/clients/`.
+  - `--malicious-clients 2` → poisons `data/clients/client_2.csv`
+  - `--malicious-clients 2,5` → poisons `client_2.csv` and `client_5.csv`
+- If you want to justify *why* a certain client is chosen (e.g., “high DoS concentration”), cite `data/clients/manifest.json` which stores family distributions per client.
 
 ### Phase 7 — Poisoning‑resistant defenses (core contribution)
 Two defense options are implemented.
@@ -125,11 +134,11 @@ Every `fl-train` run stores metrics locally under `runs/<run_id>/`:
 - `rounds.json` — per-round metrics in JSON
 - `rounds.csv` — per-round metrics in CSV (Excel friendly)
 
+This is produced by `nsl_kdd/local_logger.py`.
+
 ---
 
 ## Repo features
-(Quick summary — detailed steps are in **Implementation phases** above.)
-
 - Dataset loading + preprocessing (binary IDS)
 - Non‑IID client simulation
 - Baseline FL (FedAvg)
@@ -145,16 +154,11 @@ When you run `split-clients`, you’ll get:
 - `data/clients/client_1.csv` … `client_5.csv`
 - `data/clients/manifest.json` (family distributions)
 
-### Terminal output
-When you run `fl-train`, you’ll see:
-- final metrics (accuracy/precision/recall/F1)
-- round-by-round history
-- for `--aggregation cosine`, extra diagnostics like:
-  - `cosine_sim_mean`
-  - `trust_mean`
-  - `loss_stability_mean`
-  - `cross_layer_mean`
-  - `dropped_clients`
+### Local metrics logs
+When you run `fl-train`, you’ll get a new folder `runs/<run_id>/` containing:
+- `run.json`
+- `rounds.json`
+- `rounds.csv`
 
 ---
 
@@ -165,25 +169,27 @@ This repo reports standard IDS‑friendly binary classification metrics on `KDDT
 - **Recall (Detection Rate / TPR)** — how many true attacks are detected (very important for IDS)
 - **F1-score** — balance between precision and recall
 
-For your report/viva, you should compare these scenarios:
-1) Baseline FL (FedAvg)
-2) FL + Poisoning (label flipping)
-3) FL + Defense (Option A cosine trust, Option B clipped robust aggregation)
+### Extra metrics (recommended for report)
+Your advisor’s suggestion is solid: add IDS-specific error rates.
+At minimum, report:
+- **False Positive Rate (FPR)** = FP / (FP + TN)
+- **False Negative Rate (FNR)** = FN / (FN + TP)  *(missed attacks)*
+
+(These aren’t currently printed by the CLI, but they are straightforward to compute from a confusion matrix. See **Future Scope** below.)
 
 ---
 
 ## Plots (3 research‑grade figures)
-Use the local run logs (`runs/<run_id>/rounds.json` or `runs.csv`) to generate the three key plots:
+Use the local run logs (`runs/<run_id>/rounds.json` or `rounds.csv`) to generate the three key plots:
 
 ### Plot 1 — Accuracy vs FL Rounds
-Shows learning progression and compares:
-- Phase 5: Clean FedAvg
-- Phase 6: FedAvg + Poisoning
-- Phase 7: Poisoning‑Resistant FL
+Compare:
+- Clean FedAvg
+- FedAvg + Poisoning
+- Defended FL
 
 ### Plot 2 — Recall vs FL Rounds (IDS priority)
 Recall is critical in IDS because false negatives mean missed attacks.
-This plot shows poisoning increasing missed attacks and the defense reducing them.
 
 ### Plot 3 — Trust/Defense signal vs FL Rounds (Phase 7 only)
 Shows the defense is active and interpretable (e.g., `trust_mean`, `cosine_sim_mean`, or `dropped_clients`).
@@ -192,7 +198,7 @@ Shows the defense is active and interpretable (e.g., `trust_mean`, `cosine_sim_m
 After you have 3 runs saved locally (clean/poisoned/defended), run:
 
 ```powershell
-python main.py plot --clean "runs/binary_model(clean)" --poisoned "runs/binary_model(poisoned)" --defended "runs/binary_model(defended)" --out-dir figures
+python main.py plot --clean "runs/<clean_run_id>" --poisoned "runs/<poisoned_run_id>" --defended "runs/<defended_run_id>" --out-dir figures
 ```
 
 Output:
@@ -202,24 +208,76 @@ Output:
 
 ---
 
-## Multi-run comparison (all scenarios in one plot)
-If you have the 6 scenario folders under `runs/` (from centralized baseline through robust defenses), you can generate:
+## Multi-run comparison (single plot across all scenarios)
+If you have the scenario folders under `runs/`:
+- `Centralized_baseline/`
+- `baseline_FedAvg/`
+- `Poisoning_attack(label_flipping)/`
+- `Cross-layer_trust_weighting(cosine)+outlier_drop/`
+- `trimmed_mean(clipping+robust aggregation)/`
+- `coordinate_median(trimming+robust aggregation)/`
+
+You can generate:
 - **One single comparison plot** with all runs overlaid
 - **One merged metrics file** containing every round’s metrics from every run
 
 Run:
-
 ```powershell
 python -m nsl_kdd.compare_runs
 ```
 
-Outputs:
-- `figures/comparison/comparison_accuracy.png` (all scenarios: accuracy vs rounds)
-- `figures/comparison/comparison_recall.png` (all scenarios: recall vs rounds)
+Outputs (already generated into `figures/comparison/`):
+- `figures/comparison/comparison_accuracy.png`
+- `figures/comparison/comparison_recall.png`
 - `figures/comparison/all_round_metrics.json`
 - `figures/comparison/all_round_metrics.csv`
 
-The merged metrics files contain a `run_name` column so you can filter/group by scenario.
+---
+
+## Future scope / improvements (based on advisor feedback)
+If your ma’am asked for these, here’s how they map to the project.
+
+### 1) Flow diagram (architecture + dataflow)
+Yes — you should add a clear flow diagram in your report:
+- **NSL‑KDD → preprocessing → client splits → local training → server aggregation → evaluation → plots**
+
+You can draw it in ToDiagram and include:
+- (a) data flow (where files are read/written)
+- (b) FL flow (client updates → aggregator)
+
+### 2) Compare 5 clients vs 10 clients
+You already support this:
+- `python main.py split-clients --n-clients 10 --client-size 2000 --seed 42`
+
+Only note: the current code uses a custom non‑IID spec only for 5 clients (default). For 10 clients it will fall back to a generic split unless you add 10‑client specs.
+
+### 3) What happens when attacker ratio is high?
+Run the same experiment but poison more clients, e.g.:
+- 1/5 attackers (20%)
+- 2/5 attackers (40%)
+- 3/5 attackers (60%)
+
+Then compare **recall + FPR**. This becomes a nice “robustness vs attacker ratio” table/plot.
+
+### 4) Can the server know which client is attacker? (and “send back” info)
+Right now:
+- The server **computes per-client trust diagnostics** internally (cosine similarity / cross-layer consistency).
+- It uses these to down-weight or drop clients.
+
+A novel extension is:
+- Send each client a “trust feedback” score per round.
+- Clients can self-audit (or be quarantined by policy) if their trust is consistently low.
+
+### 5) Comparison with existing systems
+You already have multiple baselines in `runs/`:
+- centralized baseline
+- FedAvg
+- FedAvg + poisoning
+- trust-aware cosine
+- trimmed mean
+- coordinate median
+
+That’s a strong comparison section.
 
 ---
 
