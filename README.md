@@ -75,9 +75,18 @@ Recommended demo split (2k rows/client works well and runs fast):
 python main.py split-clients --client-size 2000 --seed 42
 ```
 
+✅ Scale-up (e.g., **30 clients**):
+```powershell
+python main.py split-clients --n-clients 30 --client-size 2000 --seed 42 --out data/clients_30
+```
+
 Outputs:
 - `data/clients/client_1.csv` … `client_5.csv`
 - `data/clients/manifest.json` (family distributions)
+
+For 30 clients (example above):
+- `data/clients_30/client_1.csv` … `client_30.csv`
+- `data/clients_30/manifest.json`
 
 ### Phase 5 — Local IDS model (client‑side)
 What happens:
@@ -168,6 +177,10 @@ This repo reports standard IDS‑friendly binary classification metrics on `KDDT
 - **Precision** — how many predicted attacks are actually attacks
 - **Recall (Detection Rate / TPR)** — how many true attacks are detected (very important for IDS)
 - **F1-score** — balance between precision and recall
+- **False Positive Rate (FPR)** = FP / (FP + TN)
+
+> FPR is now computed automatically by the FL evaluation code and is logged per round
+> into `runs/<run_id>/rounds.csv` and `runs/<run_id>/rounds.json`.
 
 ### Extra metrics (recommended for report)
 Your advisor’s suggestion is solid: add IDS-specific error rates.
@@ -208,6 +221,26 @@ Output:
 
 ---
 
+## Attacker count sweep (5 vs 10 vs “high attackers”)
+To compare **recall** and **false positive rate** as the attacker ratio increases, use:
+
+```powershell
+python scripts/sweep_attackers.py --clients-dir data/clients_30 --attackers 5,10,15 --label-flip-rate 0.3 --aggregation fedavg --rounds 3
+```
+
+What this produces:
+- **Per-run logs** for each attacker setting: `runs/<run_id>/` containing `run.json`, `rounds.csv`, `rounds.json`
+- A **timestamped sweep summary CSV**:
+  - `figures/sweeps/attackers_summary_<YYYYMMDD_HHMMSS>.csv`
+
+The sweep CSV includes:
+- `n_attackers`
+- `recall`
+- `false_positive_rate`
+- plus config fields (aggregation, flip rate, etc.)
+
+---
+
 ## Multi-run comparison (single plot across all scenarios)
 If you have the scenario folders under `runs/`:
 - `Centralized_baseline/`
@@ -229,8 +262,10 @@ python -m nsl_kdd.compare_runs
 Outputs (already generated into `figures/comparison/`):
 - `figures/comparison/comparison_accuracy.png`
 - `figures/comparison/comparison_recall.png`
+- `figures/comparison/comparison_false_positive_rate.png`
 - `figures/comparison/all_round_metrics.json`
 - `figures/comparison/all_round_metrics.csv`
+- `figures/comparison/final_round_summary.csv`
 
 ---
 
@@ -249,15 +284,16 @@ You can draw it in ToDiagram and include:
 You already support this:
 - `python main.py split-clients --n-clients 10 --client-size 2000 --seed 42`
 
-Only note: the current code uses a custom non‑IID spec only for 5 clients (default). For 10 clients it will fall back to a generic split unless you add 10‑client specs.
+Also supported:
+- **30 clients**: `python main.py split-clients --n-clients 30 --client-size 2000 --seed 42 --out data/clients_30`
 
 ### 3) What happens when attacker ratio is high?
-Run the same experiment but poison more clients, e.g.:
-- 1/5 attackers (20%)
-- 2/5 attackers (40%)
-- 3/5 attackers (60%)
+Run the same experiment but poison more clients, e.g. (for 30 clients):
+- 5/30 attackers (~16.7%)
+- 10/30 attackers (~33.3%)
+- 15/30 attackers (50%)
 
-Then compare **recall + FPR**. This becomes a nice “robustness vs attacker ratio” table/plot.
+Then compare **recall + FPR** from the sweep summary CSV under `figures/sweeps/`.
 
 ### 4) Can the server know which client is attacker? (and “send back” info)
 Right now:

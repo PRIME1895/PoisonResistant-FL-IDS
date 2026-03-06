@@ -40,6 +40,50 @@ DEFAULT_5_CLIENT_SPECS: List[SplitSpec] = [
 ]
 
 
+def make_split_specs(n_clients: int, *, seed: int = 1337) -> List[SplitSpec]:
+    """Generate deterministic non-IID split specs for an arbitrary number of clients.
+
+    We cycle through a small set of "archetypes" (normal-heavy, dos-heavy, probe-heavy,
+    mixed, rare-attacks) and add tiny seeded jitter so clients aren't identical.
+
+    This keeps existing 5-client behavior intact (DEFAULT_5_CLIENT_SPECS), while
+    enabling experiments like n_clients=30.
+    """
+
+    if n_clients <= 0:
+        raise ValueError("n_clients must be > 0")
+
+    # Canonical archetypes (sum <= 1.0).
+    archetypes: list[tuple[str, Dict[str, float]]] = [
+        ("mostly_normal", {"normal": 0.80, "dos": 0.10, "probe": 0.05, "r2l": 0.03, "u2r": 0.02}),
+        ("mostly_dos", {"dos": 0.75, "normal": 0.15, "probe": 0.05, "r2l": 0.04, "u2r": 0.01}),
+        ("mostly_probe", {"probe": 0.70, "normal": 0.15, "dos": 0.10, "r2l": 0.04, "u2r": 0.01}),
+        ("mixed", {"normal": 0.40, "dos": 0.30, "probe": 0.15, "r2l": 0.10, "u2r": 0.05}),
+        ("rare_attacks", {"r2l": 0.60, "u2r": 0.20, "normal": 0.15, "probe": 0.03, "dos": 0.02}),
+    ]
+
+    rng = np.random.default_rng(seed)
+    specs: List[SplitSpec] = []
+    for i in range(n_clients):
+        tag, base = archetypes[i % len(archetypes)]
+        props = dict(base)
+
+        # Add small jitter to the dominant family only; then renormalize to keep sum <= 1.
+        # This avoids negative proportions while still making clients distinct.
+        dominant = max(props.keys(), key=lambda k: props[k])
+        jitter = float(rng.uniform(-0.03, 0.03))
+        props[dominant] = float(np.clip(props[dominant] + jitter, 0.05, 0.95))
+
+        total = float(sum(props.values()))
+        if total > 1.0:
+            for k in list(props.keys()):
+                props[k] = float(props[k] / total)
+
+        specs.append(SplitSpec(name=f"client_{i+1}_{tag}", proportions=props))
+
+    return specs
+
+
 def add_family_column(df: pd.DataFrame, *, col: str = "family") -> pd.DataFrame:
     if "label" not in df.columns:
         raise ValueError("Expected a 'label' column to derive attack families.")
@@ -73,7 +117,9 @@ def split_non_iid(
     if n_clients <= 0:
         raise ValueError("n_clients must be > 0")
 
-    specs = specs or DEFAULT_5_CLIENT_SPECS
+    if specs is None:
+        specs = DEFAULT_5_CLIENT_SPECS if n_clients == 5 else make_split_specs(n_clients, seed=seed)
+
     if len(specs) != n_clients:
         raise ValueError(f"Expected {n_clients} specs, got {len(specs)}")
 
@@ -88,7 +134,7 @@ def split_non_iid(
     # Build pools per family.
     pools: Dict[str, np.ndarray] = {}
     for fam, fam_df in df_f.groupby("family"):
-        idx = fam_df.index.to_numpy()
+        idx = fam_df.index.to_numpy(copy=True)
         rng.shuffle(idx)
         pools[str(fam)] = idx
 

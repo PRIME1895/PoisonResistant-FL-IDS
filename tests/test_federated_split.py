@@ -22,3 +22,15 @@ def test_split_non_iid_produces_5_clients_with_sizes() -> None:
 
     # Each client keeps label column.
     assert all("label" in c.columns for c in clients)
+
+
+def test_split_non_iid_30_clients() -> None:
+    root = Path(__file__).resolve().parents[1]
+    train_path = root / "KDDTrain+.txt"
+
+    df = load_nsl_kdd(train_path).head(20000)
+
+    clients, manifest = split_non_iid(df, n_clients=30, client_size=100, seed=123)
+    assert len(clients) == 30
+    assert manifest["n_clients"] == 30
+    assert all(len(c) == 100 for c in clients)

@@ -273,11 +273,20 @@ def evaluate(model: nn.Module, X: pd.DataFrame, y: np.ndarray, *, device: str) -
     probs = 1.0 / (1.0 + np.exp(-logits))
     y_pred = (probs >= 0.5).astype(int)
 
+    # Binary confusion-matrix derived metric.
+    # FPR = FP / (FP + TN). If there are no negatives in y, define FPR=0.
+    y_true = y.astype(int)
+    fp = int(np.sum((y_true == 0) & (y_pred == 1)))
+    tn = int(np.sum((y_true == 0) & (y_pred == 0)))
+    denom = fp + tn
+    fpr = float(fp / denom) if denom > 0 else 0.0
+
     return {
         "accuracy": float(accuracy_score(y, y_pred)),
         "precision": float(precision_score(y, y_pred, zero_division=0)),
         "recall": float(recall_score(y, y_pred, zero_division=0)),
         "f1": float(f1_score(y, y_pred, zero_division=0)),
+        "false_positive_rate": fpr,
     }
 
 

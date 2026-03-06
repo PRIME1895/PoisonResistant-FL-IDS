@@ -98,6 +98,32 @@ def plot_comparison(df: pd.DataFrame, *, metric: str, out_path: Path, title: str
     plt.close()
 
 
+def _final_round_summary(df: pd.DataFrame) -> pd.DataFrame:
+    """One-row-per-run summary using the last logged round."""
+
+    rows: list[pd.Series] = []
+    for name, g in df.groupby("run_name"):
+        g = g.sort_values("round")
+        last = g.iloc[-1].copy()
+        last["run_name"] = name
+        rows.append(last)
+    if not rows:
+        return pd.DataFrame()
+    out = pd.DataFrame(rows)
+    # Keep a stable subset when present.
+    preferred = [
+        "run_name",
+        "round",
+        "accuracy",
+        "precision",
+        "recall",
+        "f1",
+        "false_positive_rate",
+    ]
+    cols = [c for c in preferred if c in out.columns] + [c for c in out.columns if c not in preferred]
+    return out[cols].reset_index(drop=True)
+
+
 DEFAULT_RUNS = [
     "Centralized_baseline",
     "baseline_FedAvg",
@@ -130,11 +156,25 @@ def main() -> int:
         out_path=out_root / "comparison_recall.png",
         title="All Scenarios — Recall vs Rounds",
     )
+    plot_comparison(
+        merged,
+        metric="false_positive_rate",
+        out_path=out_root / "comparison_false_positive_rate.png",
+        title="All Scenarios — False Positive Rate vs Rounds",
+    )
+
+    final = _final_round_summary(merged)
+    if not final.empty:
+        final.to_csv(out_root / "final_round_summary.csv", index=False)
+        final.to_json(out_root / "final_round_summary.json", orient="records", indent=2)
 
     print(f"Wrote merged metrics: {out_root / 'all_round_metrics.csv'}")
     print(f"Wrote merged metrics: {out_root / 'all_round_metrics.json'}")
     print(f"Wrote plot: {out_root / 'comparison_accuracy.png'}")
     print(f"Wrote plot: {out_root / 'comparison_recall.png'}")
+    print(f"Wrote plot: {out_root / 'comparison_false_positive_rate.png'}")
+    if not final.empty:
+        print(f"Wrote final summary: {out_root / 'final_round_summary.csv'}")
     return 0
 
 
