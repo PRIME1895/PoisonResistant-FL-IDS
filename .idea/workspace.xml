@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="213e15c2-7a6a-4bff-a539-f912c47af212" name="Changes" comment="Add plotting utilities and update README with usage instructions for generating research-grade figures">
-      <change afterPath="$PROJECT_DIR$/scripts/sweep_attackers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Poisoning‑Resistant Cross‑Layer Federated Intrusion Detection System (FL‑IDS).iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Poisoning‑Resistant Cross‑Layer Federated Intrusion Detection System (FL‑IDS).iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nsl_kdd/compare_runs.py" beforeDir="false" afterPath="$PROJECT_DIR$/nsl_kdd/compare_runs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nsl_kdd/federated.py" beforeDir="false" afterPath="$PROJECT_DIR$/nsl_kdd/federated.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" beforeDir="false" afterPath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_federated_split.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_federated_split.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +24,10 @@
       <entry key="chat-panel" value="GPT-5.2" />
       <entry key="agent-panel" value="GPT-5.2" />
     </selectedModels>
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="97" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -58,36 +56,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.load_data.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "/home/PRIME1895/PycharmProjects/CGCNN-for-Bandgap-Prediction",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.github.copilot.settings.customization.CustomizationConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.load_data.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/PRIME1895/PycharmProjects/CGCNN-for-Bandgap-Prediction&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.copilot.settings.customization.CustomizationConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-3bd3a6803838-JavaScript-PY-261.21849.34" />
-        <option value="bundled-python-sdk-d45ac68cd30b-b61e75351b1f-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.21849.34" />
+        <option value="bundled-js-predefined-d6986cc7102b-3bd3a6803838-JavaScript-PY-261.22158.41" />
+        <option value="bundled-python-sdk-8c3867224628-b61e75351b1f-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.22158.41" />
       </set>
     </attachedChunks>
   </component>
@@ -108,7 +106,8 @@
       <workItem from="1769064663958" duration="418000" />
       <workItem from="1770739805903" duration="44000" />
       <workItem from="1770739852495" duration="39000" />
-      <workItem from="1772806831289" duration="3205000" />
+      <workItem from="1772806831289" duration="3368000" />
+      <workItem from="1772896531703" duration="1363000" />
     </task>
     <task id="LOCAL-00001" summary="Add project configuration files for Poisoning-Resistant Cross-Layer Federated Intrusion Detection System (FL-IDS)">
       <option name="closed" value="true" />
@@ -198,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769016911416</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add plotting utilities and update README with usage instructions for generating research-grade figures">
+      <option name="closed" value="true" />
+      <created>1772810196545</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1772810196545</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

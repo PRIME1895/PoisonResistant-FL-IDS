@@ -77,7 +77,7 @@ python main.py split-clients --client-size 2000 --seed 42
 
 ✅ Scale-up (e.g., **30 clients**):
 ```powershell
-python main.py split-clients --n-clients 30 --client-size 2000 --seed 42 --out data/clients_30
+python main.py split-clients --n-clients 30 --client-size 2000 --seed 42 --out data/clients
 ```
 
 Outputs:
@@ -85,8 +85,8 @@ Outputs:
 - `data/clients/manifest.json` (family distributions)
 
 For 30 clients (example above):
-- `data/clients_30/client_1.csv` … `client_30.csv`
-- `data/clients_30/manifest.json`
+- `data/clients/client_1.csv` … `client_30.csv`
+- `data/clients/manifest.json`
 
 ### Phase 5 — Local IDS model (client‑side)
 What happens:
@@ -188,7 +188,7 @@ At minimum, report:
 - **False Positive Rate (FPR)** = FP / (FP + TN)
 - **False Negative Rate (FNR)** = FN / (FN + TP)  *(missed attacks)*
 
-(These aren’t currently printed by the CLI, but they are straightforward to compute from a confusion matrix. See **Future Scope** below.)
+(These aren’t currently printed by the CLI, but they are straightforward to compute from a confusion matrix.)
 
 ---
 
@@ -225,95 +225,46 @@ Output:
 To compare **recall** and **false positive rate** as the attacker ratio increases, use:
 
 ```powershell
-python scripts/sweep_attackers.py --clients-dir data/clients_30 --attackers 5,10,15 --label-flip-rate 0.3 --aggregation fedavg --rounds 3
+python scripts/sweep_attackers.py --clients-dir data/clients --attackers 5,10,15 --label-flip-rate 0.3 --aggregation fedavg --rounds 3
 ```
 
-What this produces:
-- **Per-run logs** for each attacker setting: `runs/<run_id>/` containing `run.json`, `rounds.csv`, `rounds.json`
-- A **timestamped sweep summary CSV**:
-  - `figures/sweeps/attackers_summary_<YYYYMMDD_HHMMSS>.csv`
+### Results (30 clients; label-flip-rate=0.3)
+Sweep summaries are stored under `figures/sweeps/`.
 
-The sweep CSV includes:
-- `n_attackers`
-- `recall`
-- `false_positive_rate`
-- plus config fields (aggregation, flip rate, etc.)
+#### FedAvg (baseline)
+Source: `figures/sweeps/attackers_summary.csv`
 
----
+| # attackers (of 30) | Recall (TPR) | False Positive Rate (FPR) | Accuracy | F1 |
+|---:|---:|---:|---:|---:|
+| 5  | 0.6614 | 0.0719 | 0.7763 | 0.7710 |
+| 10 | 0.6581 | 0.0707 | 0.7749 | 0.7690 |
+| 15 | 0.6599 | 0.0715 | 0.7756 | 0.7700 |
 
-## Multi-run comparison (single plot across all scenarios)
-If you have the scenario folders under `runs/`:
-- `Centralized_baseline/`
-- `baseline_FedAvg/`
-- `Poisoning_attack(label_flipping)/`
-- `Cross-layer_trust_weighting(cosine)+outlier_drop/`
-- `trimmed_mean(clipping+robust aggregation)/`
-- `coordinate_median(trimming+robust aggregation)/`
+#### Trimmed Mean (robust aggregation)
+Reproduce:
+```powershell
+python scripts/sweep_attackers.py --clients-dir data/clients --attackers 5,10 --label-flip-rate 0.3 --aggregation trimmed_mean --rounds 3 --clip-norm 5 --trim-ratio 0.2
+```
 
-You can generate:
-- **One single comparison plot** with all runs overlaid
-- **One merged metrics file** containing every round’s metrics from every run
+Source: `figures/sweeps/attackers_summary_20260307_210555.csv`
 
-Run:
+| # attackers (of 30) | Recall (TPR) | False Positive Rate (FPR) | Accuracy | F1 |
+|---:|---:|---:|---:|---:|
+| 5  | 0.6744 | 0.0727 | 0.7834 | 0.7799 |
+| 10 | 0.6730 | 0.0721 | 0.7828 | 0.7792 |
+
+### Plots for 30-client experiments
+To generate comparison plots (Accuracy / Recall / FPR vs rounds) across multiple saved runs, place your run folders under `runs/` and run:
+
 ```powershell
 python -m nsl_kdd.compare_runs
 ```
 
-Outputs (already generated into `figures/comparison/`):
+Outputs:
 - `figures/comparison/comparison_accuracy.png`
 - `figures/comparison/comparison_recall.png`
 - `figures/comparison/comparison_false_positive_rate.png`
-- `figures/comparison/all_round_metrics.json`
-- `figures/comparison/all_round_metrics.csv`
 - `figures/comparison/final_round_summary.csv`
-
----
-
-## Future scope / improvements (based on advisor feedback)
-If your ma’am asked for these, here’s how they map to the project.
-
-### 1) Flow diagram (architecture + dataflow)
-Yes — you should add a clear flow diagram in your report:
-- **NSL‑KDD → preprocessing → client splits → local training → server aggregation → evaluation → plots**
-
-You can draw it in ToDiagram and include:
-- (a) data flow (where files are read/written)
-- (b) FL flow (client updates → aggregator)
-
-### 2) Compare 5 clients vs 10 clients
-You already support this:
-- `python main.py split-clients --n-clients 10 --client-size 2000 --seed 42`
-
-Also supported:
-- **30 clients**: `python main.py split-clients --n-clients 30 --client-size 2000 --seed 42 --out data/clients_30`
-
-### 3) What happens when attacker ratio is high?
-Run the same experiment but poison more clients, e.g. (for 30 clients):
-- 5/30 attackers (~16.7%)
-- 10/30 attackers (~33.3%)
-- 15/30 attackers (50%)
-
-Then compare **recall + FPR** from the sweep summary CSV under `figures/sweeps/`.
-
-### 4) Can the server know which client is attacker? (and “send back” info)
-Right now:
-- The server **computes per-client trust diagnostics** internally (cosine similarity / cross-layer consistency).
-- It uses these to down-weight or drop clients.
-
-A novel extension is:
-- Send each client a “trust feedback” score per round.
-- Clients can self-audit (or be quarantined by policy) if their trust is consistently low.
-
-### 5) Comparison with existing systems
-You already have multiple baselines in `runs/`:
-- centralized baseline
-- FedAvg
-- FedAvg + poisoning
-- trust-aware cosine
-- trimmed mean
-- coordinate median
-
-That’s a strong comparison section.
 
 ---
 
@@ -321,14 +272,3 @@ That’s a strong comparison section.
 ```powershell
 pytest
 ```
-
----
-
-## Dataset credit (NSL‑KDD)
-This project uses the **NSL‑KDD** dataset, an improved version of the KDD’99 dataset for intrusion detection research.
-
-Please cite:
-- M. Tavallaee, E. Bagheri, W. Lu, and A. A. Ghorbani, “A Detailed Analysis of the KDD CUP 99 Data Set,” *Proceedings of the IEEE Symposium on Computational Intelligence for Security and Defense Applications (CISDA)*, 2009.
-
-Dataset reference/download:
-- https://www.unb.ca/cic/datasets/nsl.html
