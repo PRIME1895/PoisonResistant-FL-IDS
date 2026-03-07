@@ -555,6 +555,7 @@ def train_fedavg_binary(
             b = float(config.trust_beta)
             c = float(config.trust_gamma)
             denom = max(1e-12, a + b + c)
+
             trusts = [
                 float(
                     np.clip(
@@ -574,24 +575,67 @@ def train_fedavg_binary(
                 keep = [i for i in keep if i not in set(drop_idx)]
 
             kept_states = [client_states[i] for i in keep]
-            kept_weights = [base_weights[i] * trusts[i] for i in keep]
-            if float(sum(kept_weights)) <= 0:
-                kept_weights = [base_weights[i] for i in keep]
-
+            kept_weights = [base_weights[i] for i in keep]
+            # Trust-weighted FedAvg
+            if trusts:
+                kept_trusts = [trusts[i] for i in keep]
+                norm = float(sum(kept_trusts))
+                if norm <= 1e-12:
+                    kept_weights = kept_weights
+                else:
+                    kept_weights = [w * (t / norm) for w, t in zip(kept_weights, kept_trusts)]
             new_state = fedavg(kept_states, kept_weights)
 
-        elif agg in {"trimmed_mean", "median"}:
+        elif agg == "trimmed_mean":
             updates = list(client_updates)
-            if agg == "median":
-                robust_upd = _coordinate_median(updates)
-            else:
-                robust_upd = _coordinate_trimmed_mean(updates, trim_ratio=float(config.trim_ratio))
+            robust_upd = _coordinate_trimmed_mean(updates, trim_ratio=float(config.trim_ratio))
+            new_state = _add_state(global_state, robust_upd)
+
+        elif agg == "median":
+            updates = list(client_updates)
+            robust_upd = _coordinate_median(updates)
             new_state = _add_state(global_state, robust_upd)
 
         else:
-            raise ValueError(f"Unknown aggregation strategy: {config.aggregation}")
+            raise ValueError(f"Unknown aggregation: {agg}")
 
-        _set_state(global_model, new_state)
+        # ------------------- client feedback (server → client) -------------------
+        # Persist per-client diagnostics each round so future work can simulate
+        # "sending back" trust/quarantine signals to clients.
+        if local_logger is not None and local_run is not None:
+            try:
+                from nsl_kdd.client_feedback import ClientFeedback, round_feedback_payload
+
+                dropped_set = set(int(x) for x in dropped)
+                msgs = []
+                for cid in range(1, len(client_updates) + 1):
+                    used = cid not in dropped_set
+                    sim = similarities[cid - 1] if similarities else None
+                    trust = trusts[cid - 1] if trusts else None
+                    loss_stab = loss_stabilities[cid - 1] if loss_stabilities else None
+                    xlayer = cross_layer_scores[cid - 1] if cross_layer_scores else None
+                    notes = None
+                    if cid in dropped_set:
+                        notes = "dropped_by_server"
+                    msgs.append(
+                        ClientFeedback(
+                            client_id=cid,
+                            used=used,
+                            trust=trust,
+                            cosine_similarity=sim,
+                            loss_stability=loss_stab,
+                            cross_layer=xlayer,
+                            notes=notes,
+                        )
+                    )
+
+                local_logger.log_client_feedback(
+                    run=local_run,
+                    round_num=int(rnd + 1),
+                    payload=round_feedback_payload(round_num=int(rnd + 1), feedback=msgs),
+                )
+            except Exception:
+                pass
 
         metrics = evaluate(global_model, X_test, y_test, device=config.device)
         metrics["round"] = float(rnd + 1)

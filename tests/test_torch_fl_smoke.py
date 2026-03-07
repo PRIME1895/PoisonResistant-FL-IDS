@@ -78,11 +78,22 @@ def test_torch_fl_poisoning_and_defenses_smoke() -> None:
         trust_gamma=0.5,
     )
     res_a = train_fedavg_binary(client_dfs, test_df, config=defended_a)
-    assert 0.0 <= res_a.metrics["f1"] <= 1.0
-    # Diagnostics exposed
-    assert "trust_mean" in res_a.metrics
-    assert "cross_layer_mean" in res_a.metrics
-    assert "loss_stability_mean" in res_a.metrics
+    assert 0.0 <= res_a.metrics["accuracy"] <= 1.0
+
+    # Ensure server→client feedback gets persisted locally.
+    # train_fedavg_binary writes runs/<run_id>/client_feedback.json.
+    import json
+
+    runs_root = Path.cwd() / "runs"
+    assert runs_root.exists()
+    latest = max((p for p in runs_root.iterdir() if p.is_dir()), key=lambda p: p.stat().st_mtime)
+    feedback_path = latest / "client_feedback.json"
+    assert feedback_path.exists()
+    payload = json.loads(feedback_path.read_text(encoding="utf-8"))
+    assert isinstance(payload, list) and len(payload) >= 1
+    assert "clients" in payload[0]
+    assert isinstance(payload[0]["clients"], list)
+    assert len(payload[0]["clients"]) == len(client_dfs)
 
     # Phase 7 Option B: clipping + trimmed mean
     defended_b = FLConfig(

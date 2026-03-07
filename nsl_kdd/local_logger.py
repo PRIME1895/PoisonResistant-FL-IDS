@@ -73,3 +73,20 @@ class LocalLogger:
         # Also mirror to CSV for quick viewing
         df = pd.DataFrame(data)
         df.to_csv(run.dir / "rounds.csv", index=False)
+
+    def log_client_feedback(self, *, run: LocalRun, round_num: int, payload: Dict[str, Any]) -> None:
+        """Append per-round server→client feedback payload.
+
+        Stored at: runs/<run_id>/client_feedback.json
+        Format: a list of {round: int, clients: [...]}
+        """
+
+        path = run.dir / "client_feedback.json"
+        if path.exists():
+            data = json.loads(path.read_text(encoding="utf-8"))
+        else:
+            data = []
+
+        row = {"round": int(round_num), "logged_at": _utcnow_iso(), **payload}
+        data.append(row)
+        _safe_write_json(path, data)

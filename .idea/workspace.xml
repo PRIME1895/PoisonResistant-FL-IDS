@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="213e15c2-7a6a-4bff-a539-f912c47af212" name="Changes" comment="Add plotting utilities and update README with usage instructions for generating research-grade figures">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nsl_kdd/client_feedback.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nsl_kdd/local_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/nsl_kdd/local_logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" beforeDir="false" afterPath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/split_clients.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/verify_nsl_kdd.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_torch_fl_smoke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_torch_fl_smoke.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +111,7 @@
       <workItem from="1770739805903" duration="44000" />
       <workItem from="1770739852495" duration="39000" />
       <workItem from="1772806831289" duration="3368000" />
-      <workItem from="1772896531703" duration="1363000" />
+      <workItem from="1772896531703" duration="1835000" />
     </task>
     <task id="LOCAL-00001" summary="Add project configuration files for Poisoning-Resistant Cross-Layer Federated Intrusion Detection System (FL-IDS)">
       <option name="closed" value="true" />
@@ -205,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772810196545</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Add plotting utilities and update README with usage instructions for generating research-grade figures">
+      <option name="closed" value="true" />
+      <created>1772898174681</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1772898174681</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

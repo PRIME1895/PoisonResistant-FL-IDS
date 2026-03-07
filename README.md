@@ -268,6 +268,31 @@ Outputs:
 
 ---
 
+## Server → client feedback (trust signal per round)
+When using trust-aware aggregation (e.g., `--aggregation cosine`), the server computes per-client diagnostics each round (cosine similarity, loss stability, cross-layer score) and a **trust score**. To support the future scope "send back to client", this repo now **persists a feedback message for every client every round**.
+
+### Where it is stored
+After any `fl-train` run, look inside the run folder:
+- `runs/<run_id>/client_feedback.json`
+
+This file is a list of per-round payloads. Each round contains a `clients` list with entries like:
+- `client_id` (1-based client index)
+- `used` (whether the server used the update this round)
+- `trust` (only for trust-aware aggregation)
+- `cosine_similarity`, `loss_stability`, `cross_layer`
+- `notes` (e.g., `dropped_by_server`)
+
+### CLI example (generates feedback)
+This will create a new `runs/<run_id>/` folder containing `client_feedback.json`:
+
+```powershell
+python main.py fl-train --clients-dir data/clients --rounds 5 --local-epochs 1 --device cpu --seed 42 --malicious-clients 2 --label-flip-rate 0.5 --aggregation cosine --cosine-drop-k 1 --trust-alpha 1.0 --trust-beta 0.5 --trust-gamma 0.5
+```
+
+> Note: for non-trust aggregations (e.g., `fedavg`, `trimmed_mean`), feedback is still written each round, but `trust/cosine_similarity` may be absent.
+
+---
+
 ## Tests
 ```powershell
 pytest
