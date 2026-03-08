@@ -323,6 +323,76 @@ python main.py fl-train --clients-dir data/clients --rounds 5 --local-epochs 1 -
 
 ---
 
+## Client feedback metrics for attacker count sweep (5 vs 10 vs 15)
+Each attacker-count sweep run also writes a per-round **server → client feedback** log at:
+- `runs/<run_id>/client_feedback.json`
+
+This makes it possible to compare *defense behavior* (not just accuracy/recall/FPR) as the number of attackers increases.
+
+### What to measure from `client_feedback.json`
+Depending on the aggregation strategy:
+- For `--aggregation cosine` (trust-aware), feedback typically includes:
+  - `trust`, `cosine_similarity`, `loss_stability`, `cross_layer`, and whether the update was `used`
+- For non-trust aggregations (e.g., `fedavg`, `trimmed_mean`, `median`), feedback is still written, but may only include:
+  - `used` plus optional `notes`
+
+Recommended sweep-level summaries (compute across all rounds):
+- **Drop rate**: fraction of client updates with `used=false` (how aggressively the server filters)
+- **Mean trust (used vs dropped)**: compare average `trust` for accepted updates vs rejected updates
+- **Trust separation**: `mean(trust_used) - mean(trust_dropped)` (bigger is better)
+- **Attacker trust rank** *(if you know the malicious client IDs for that run)*: how often attackers land in the bottom‑k trust scores
+
+> Note: For the attacker sweep CSV alone (e.g., `figures/sweeps/attackers_summary.csv`) we already log recall + FPR.
+> The client feedback metrics come from the corresponding run folders under `runs/`.
+
+### How to extract client-feedback metrics (quick snippet)
+Use this to summarize a single run folder:
+
+```python
+import json
+from pathlib import Path
+import numpy as np
+
+run_dir = Path("runs/<run_id>")
+feedback = json.loads((run_dir / "client_feedback.json").read_text())
+
+used_flags = []
+trust_used = []
+trust_dropped = []
+
+for round_row in feedback:
+    for c in round_row.get("clients", []):
+        used = bool(c.get("used", True))
+        used_flags.append(used)
+        t = c.get("trust", None)
+        if t is None:
+            continue
+        (trust_used if used else trust_dropped).append(float(t))
+
+drop_rate = 1.0 - (np.mean(used_flags) if used_flags else 1.0)
+
+out = {
+    "drop_rate": float(drop_rate),
+    "trust_used_mean": float(np.mean(trust_used)) if trust_used else None,
+    "trust_dropped_mean": float(np.mean(trust_dropped)) if trust_dropped else None,
+    "trust_separation": (float(np.mean(trust_used)) - float(np.mean(trust_dropped))) if (trust_used and trust_dropped) else None,
+}
+
+print(out)
+```
+
+### How to link feedback metrics to sweep rows
+In the attacker sweep output CSV (example: `figures/sweeps/attackers_summary.csv`), each row includes:
+- `n_attackers`
+- `malicious_clients` (the chosen attacker IDs for that run)
+
+To compare 5 vs 10 vs 15 attackers:
+1) Take the `malicious_clients` list from the sweep CSV row.
+2) Open the matching `runs/<run_id>/client_feedback.json`.
+3) Compute the summaries above, optionally splitting trust by **malicious vs benign** client IDs.
+
+---
+
 ## Tests
 ```powershell
 pytest
