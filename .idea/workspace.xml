@@ -5,7 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="213e15c2-7a6a-4bff-a539-f912c47af212" name="Changes" comment="Add client feedback metrics section to README with extraction instructions">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_10.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_11.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_12.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_13.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_14.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_16.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_17.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_18.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_19.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_20.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_21.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_22.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_23.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_24.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_25.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_26.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_27.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_28.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_29.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_30.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_4.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_5.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_6.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_7.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_8.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/client_9.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/clients/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/comparison/all_round_metrics.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/comparison/all_round_metrics.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/comparison/comparison_accuracy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/comparison/comparison_false_positive_rate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/comparison/comparison_recall.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/comparison/final_round_summary.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/comparison/final_round_summary.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_summary.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_summary_20260306_203909.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_summary_20260307_210555.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_summary_20260308_075930.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_summary_20260308_075950.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_sweep_fpr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_sweep_recall.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/split_clients.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/verify_nsl_kdd.py" beforeDir="false" />
     </list>
@@ -27,7 +71,7 @@
     </selectedModels>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="79" />
+    <option name="cachedIndexableFilesCount" value="97" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -111,6 +155,7 @@
       <workItem from="1772896531703" duration="1885000" />
       <workItem from="1772936438131" duration="456000" />
       <workItem from="1772936933659" duration="1445000" />
+      <workItem from="1772946239038" duration="383000" />
     </task>
     <task id="LOCAL-00001" summary="Add project configuration files for Poisoning-Resistant Cross-Layer Federated Intrusion Detection System (FL-IDS)">
       <option name="closed" value="true" />
@@ -240,7 +285,23 @@
       <option name="project" value="LOCAL" />
       <updated>1772937132349</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Add client feedback metrics section to README with extraction instructions">
+      <option name="closed" value="true" />
+      <created>1772946304589</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1772946304590</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Add client feedback metrics section to README with extraction instructions">
+      <option name="closed" value="true" />
+      <created>1772946620818</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1772946620818</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,0 +1,558 @@
+{
+  "n_clients": 30,
+  "client_size": 2000,
+  "seed": 42,
+  "specs": [
+    {
+      "name": "client_1_mostly_normal",
+      "proportions": {
+        "normal": 0.8032343090707025,
+        "dos": 0.09838284546464877,
+        "probe": 0.04919142273232439,
+        "r2l": 0.029514853639394628,
+        "u2r": 0.019676569092929752
+      }
+    },
+    {
+      "name": "client_2_mostly_dos",
+      "proportions": {
+        "dos": 0.7463327063851232,
+        "normal": 0.15,
+        "probe": 0.05,
+        "r2l": 0.04,
+        "u2r": 0.01
+      }
+    },
+    {
+      "name": "client_3_mostly_probe",
+      "proportions": {
+        "probe": 0.7063188078767495,
+        "normal": 0.14684059606162522,
+        "dos": 0.09789373070775016,
+        "r2l": 0.03915749228310006,
+        "u2r": 0.009789373070775015
+      }
+    },
+    {
+      "name": "client_4_mixed",
+      "proportions": {
+        "normal": 0.40702209284861296,
+        "dos": 0.2964889535756935,
+        "probe": 0.14824447678784675,
+        "r2l": 0.09882965119189785,
+        "u2r": 0.049414825595948925
+      }
+    },
+    {
+      "name": "client_5_rare_attacks",
+      "proportions": {
+        "r2l": 0.5756506408732589,
+        "u2r": 0.2,
+        "normal": 0.15,
+        "probe": 0.03,
+        "dos": 0.02
+      }
+    },
+    {
+      "name": "client_6_mostly_normal",
+      "proportions": {
+        "normal": 0.8055491113366355,
+        "dos": 0.0972254443316822,
+        "probe": 0.0486127221658411,
+        "r2l": 0.02916763329950466,
+        "u2r": 0.01944508886633644
+      }
+    },
+    {
+      "name": "client_7_mostly_dos",
+      "proportions": {
+        "dos": 0.7538566677852877,
+        "normal": 0.14768599932882734,
+        "probe": 0.04922866644294245,
+        "r2l": 0.03938293315435396,
+        "u2r": 0.00984573328858849
+      }
+    },
+    {
+      "name": "client_8_mostly_probe",
+      "proportions": {
+        "probe": 0.7050622694199015,
+        "normal": 0.1474688652900493,
+        "dos": 0.09831257686003286,
+        "r2l": 0.03932503074401315,
+        "u2r": 0.009831257686003287
+      }
+    },
+    {
+      "name": "client_9_mixed",
+      "proportions": {
+        "normal": 0.3776868179605328,
+        "dos": 0.3,
+        "probe": 0.15,
+        "r2l": 0.1,
+        "u2r": 0.05
+      }
+    },
+    {
+      "name": "client_10_rare_attacks",
+      "proportions": {
+        "r2l": 0.597023156273734,
+        "u2r": 0.2,
+        "normal": 0.15,
+        "probe": 0.03,
+        "dos": 0.02
+      }
+    },
+    {
+      "name": "client_11_mostly_normal",
+      "proportions": {
+        "normal": 0.792247881453955,
+        "dos": 0.1,
+        "probe": 0.05,
+        "r2l": 0.03,
+        "u2r": 0.02
+      }
+    },
+    {
+      "name": "client_12_mostly_dos",
+      "proportions": {
+        "dos": 0.7562416517269501,
+        "normal": 0.14625500896382995,
+        "probe": 0.04875166965460998,
+        "r2l": 0.03900133572368798,
+        "u2r": 0.009750333930921996
+      }
+    },
+    {
+      "name": "client_13_mostly_probe",
+      "proportions": {
+        "probe": 0.7025674105121543,
+        "normal": 0.14871629474392287,
+        "dos": 0.09914419649594858,
+        "r2l": 0.03965767859837943,
+        "u2r": 0.009914419649594858
+      }
+    },
+    {
+      "name": "client_14_mixed",
+      "proportions": {
+        "normal": 0.4113986747977378,
+        "dos": 0.294300662601131,
+        "probe": 0.1471503313005655,
+        "r2l": 0.09810022086704369,
+        "u2r": 0.049050110433521844
+      }
+    },
+    {
+      "name": "client_15_rare_attacks",
+      "proportions": {
+        "r2l": 0.5966048519296399,
+        "u2r": 0.2,
+        "normal": 0.15,
+        "probe": 0.03,
+        "dos": 0.02
+      }
+    },
+    {
+      "name": "client_16_mostly_normal",
+      "proportions": {
+        "normal": 0.7836343233070867,
+        "dos": 0.1,
+        "probe": 0.05,
+        "r2l": 0.03,
+        "u2r": 0.02
+      }
+    },
+    {
+      "name": "client_17_mostly_dos",
+      "proportions": {
+        "dos": 0.7508160990097996,
+        "normal": 0.14951034059412033,
+        "probe": 0.04983678019804011,
+        "r2l": 0.03986942415843209,
+        "u2r": 0.009967356039608022
+      }
+    },
+    {
+      "name": "client_18_mostly_probe",
+      "proportions": {
+        "probe": 0.6738290353662505,
+        "normal": 0.15,
+        "dos": 0.1,
+        "r2l": 0.04,
+        "u2r": 0.01
+      }
+    },
+    {
+      "name": "client_19_mixed",
+      "proportions": {
+        "normal": 0.4115673330585254,
+        "dos": 0.29421633347073733,
+        "probe": 0.14710816673536867,
+        "r2l": 0.09807211115691244,
+        "u2r": 0.04903605557845622
+      }
+    },
+    {
+      "name": "client_20_rare_attacks",
+      "proportions": {
+        "r2l": 0.6031351780985008,
+        "u2r": 0.19843241095074965,
+        "normal": 0.14882430821306222,
+        "probe": 0.029764861642612446,
+        "dos": 0.019843241095074963
+      }
+    },
+    {
+      "name": "client_21_mostly_normal",
+      "proportions": {
+        "normal": 0.8030498255263594,
+        "dos": 0.09847508723682034,
+        "probe": 0.04923754361841017,
+        "r2l": 0.0295425261710461,
+        "u2r": 0.019695017447364068
+      }
+    },
+    {
+      "name": "client_22_mostly_dos",
+      "proportions": {
+        "dos": 0.7412715580877921,
+        "normal": 0.15,
+        "probe": 0.05,
+        "r2l": 0.04,
+        "u2r": 0.01
+      }
+    },
+    {
+      "name": "client_23_mostly_probe",
+      "proportions": {
+        "probe": 0.7082398554190844,
+        "normal": 0.14588007229045774,
+        "dos": 0.09725338152697184,
+        "r2l": 0.03890135261078873,
+        "u2r": 0.009725338152697183
+      }
+    },
+    {
+      "name": "client_24_mixed",
+      "proportions": {
+        "normal": 0.4138262372149429,
+        "dos": 0.2930868813925286,
+        "probe": 0.1465434406962643,
+        "r2l": 0.09769562713084287,
+        "u2r": 0.048847813565421436
+      }
+    },
+    {
+      "name": "client_25_rare_attacks",
+      "proportions": {
+        "r2l": 0.6065714410847708,
+        "u2r": 0.19671427945761466,
+        "normal": 0.147535709593211,
+        "probe": 0.029507141918642198,
+        "dos": 0.019671427945761467
+      }
+    },
+    {
+      "name": "client_26_mostly_normal",
+      "proportions": {
+        "normal": 0.7816783224711181,
+        "dos": 0.1,
+        "probe": 0.05,
+        "r2l": 0.03,
+        "u2r": 0.02
+      }
+    },
+    {
+      "name": "client_27_mostly_dos",
+      "proportions": {
+        "dos": 0.7480032602236221,
+        "normal": 0.15,
+        "probe": 0.05,
+        "r2l": 0.04,
+        "u2r": 0.01
+      }
+    },
+    {
+      "name": "client_28_mostly_probe",
+      "proportions": {
+        "probe": 0.6726282259472337,
+        "normal": 0.15,
+        "dos": 0.1,
+        "r2l": 0.04,
+        "u2r": 0.01
+      }
+    },
+    {
+      "name": "client_29_mixed",
+      "proportions": {
+        "normal": 0.37925736952405287,
+        "dos": 0.3,
+        "probe": 0.15,
+        "r2l": 0.1,
+        "u2r": 0.05
+      }
+    },
+    {
+      "name": "client_30_rare_attacks",
+      "proportions": {
+        "r2l": 0.6043454490834532,
+        "u2r": 0.19782727545827342,
+        "normal": 0.14837045659370504,
+        "probe": 0.02967409131874101,
+        "dos": 0.01978272754582734
+      }
+    }
+  ],
+  "source": "KDDTrain+.txt",
+  "output_dir": "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/data/clients_30",
+  "clients": {
+    "client_1": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1606,
+        "dos": 198,
+        "probe": 98,
+        "r2l": 59,
+        "u2r": 39
+      }
+    },
+    "client_2": {
+      "rows": 2000,
+      "family_counts": {
+        "dos": 1496,
+        "normal": 311,
+        "probe": 100,
+        "r2l": 80,
+        "u2r": 13
+      }
+    },
+    "client_3": {
+      "rows": 2000,
+      "family_counts": {
+        "probe": 1415,
+        "normal": 306,
+        "dos": 201,
+        "r2l": 78
+      }
+    },
+    "client_4": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 869,
+        "dos": 625,
+        "probe": 308,
+        "r2l": 198
+      }
+    },
+    "client_5": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 867,
+        "r2l": 580,
+        "dos": 406,
+        "probe": 147
+      }
+    },
+    "client_6": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1660,
+        "dos": 236,
+        "probe": 104
+      }
+    },
+    "client_7": {
+      "rows": 2000,
+      "family_counts": {
+        "dos": 1542,
+        "normal": 353,
+        "probe": 105
+      }
+    },
+    "client_8": {
+      "rows": 2000,
+      "family_counts": {
+        "probe": 1412,
+        "normal": 360,
+        "dos": 228
+      }
+    },
+    "client_9": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 954,
+        "dos": 724,
+        "probe": 322
+      }
+    },
+    "client_10": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1217,
+        "dos": 628,
+        "probe": 155
+      }
+    },
+    "client_11": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1646,
+        "dos": 248,
+        "probe": 106
+      }
+    },
+    "client_12": {
+      "rows": 2000,
+      "family_counts": {
+        "dos": 1541,
+        "normal": 356,
+        "probe": 103
+      }
+    },
+    "client_13": {
+      "rows": 2000,
+      "family_counts": {
+        "probe": 1409,
+        "normal": 353,
+        "dos": 238
+      }
+    },
+    "client_14": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 992,
+        "dos": 702,
+        "probe": 306
+      }
+    },
+    "client_15": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1208,
+        "dos": 642,
+        "probe": 150
+      }
+    },
+    "client_16": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1643,
+        "dos": 249,
+        "probe": 108
+      }
+    },
+    "client_17": {
+      "rows": 2000,
+      "family_counts": {
+        "dos": 1536,
+        "normal": 360,
+        "probe": 104
+      }
+    },
+    "client_18": {
+      "rows": 2000,
+      "family_counts": {
+        "probe": 1358,
+        "normal": 394,
+        "dos": 248
+      }
+    },
+    "client_19": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 978,
+        "dos": 710,
+        "probe": 312
+      }
+    },
+    "client_20": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1220,
+        "dos": 655,
+        "probe": 125
+      }
+    },
+    "client_21": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1661,
+        "dos": 236,
+        "probe": 103
+      }
+    },
+    "client_22": {
+      "rows": 2000,
+      "family_counts": {
+        "dos": 1526,
+        "normal": 369,
+        "probe": 105
+      }
+    },
+    "client_23": {
+      "rows": 2000,
+      "family_counts": {
+        "probe": 1419,
+        "normal": 348,
+        "dos": 233
+      }
+    },
+    "client_24": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1016,
+        "dos": 686,
+        "probe": 298
+      }
+    },
+    "client_25": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1199,
+        "dos": 707,
+        "probe": 94
+      }
+    },
+    "client_26": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1637,
+        "dos": 261,
+        "probe": 102
+      }
+    },
+    "client_27": {
+      "rows": 2000,
+      "family_counts": {
+        "dos": 1538,
+        "normal": 360,
+        "probe": 102
+      }
+    },
+    "client_28": {
+      "rows": 2000,
+      "family_counts": {
+        "probe": 1347,
+        "normal": 384,
+        "dos": 269
+      }
+    },
+    "client_29": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 973,
+        "dos": 727,
+        "probe": 300
+      }
+    },
+    "client_30": {
+      "rows": 2000,
+      "family_counts": {
+        "normal": 1295,
+        "dos": 651,
+        "probe": 54
+      }
+    }
+  }
+}
