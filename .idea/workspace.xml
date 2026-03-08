@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="213e15c2-7a6a-4bff-a539-f912c47af212" name="Changes" comment="Enhance run comparison functionality with auto-discovery of timestamped runs and update README with new usage instructions">
+    <list default="true" id="213e15c2-7a6a-4bff-a539-f912c47af212" name="Changes" comment="Add client feedback metrics section to README with extraction instructions">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/split_clients.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/verify_nsl_kdd.py" beforeDir="false" />
     </list>
@@ -26,7 +27,7 @@
     </selectedModels>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="171" />
+    <option name="cachedIndexableFilesCount" value="79" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -109,6 +110,7 @@
       <workItem from="1772806831289" duration="3368000" />
       <workItem from="1772896531703" duration="1885000" />
       <workItem from="1772936438131" duration="456000" />
+      <workItem from="1772936933659" duration="1445000" />
     </task>
     <task id="LOCAL-00001" summary="Add project configuration files for Poisoning-Resistant Cross-Layer Federated Intrusion Detection System (FL-IDS)">
       <option name="closed" value="true" />
@@ -230,7 +232,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772936881047</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Add client feedback metrics section to README with extraction instructions">
+      <option name="closed" value="true" />
+      <created>1772937132349</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1772937132349</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,7 +257,8 @@
     <MESSAGE value="Add plotting utilities and update README with usage instructions for generating research-grade figures" />
     <MESSAGE value="Add client feedback module and update README with storage details" />
     <MESSAGE value="Enhance run comparison functionality with auto-discovery of timestamped runs and update README with new usage instructions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Enhance run comparison functionality with auto-discovery of timestamped runs and update README with new usage instructions" />
+    <MESSAGE value="Add client feedback metrics section to README with extraction instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add client feedback metrics section to README with extraction instructions" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PoisoningResistant_CrossLayer_Federated_Intrusion_Detection_System__FLIDS_$load_data.coverage" NAME="load_data Coverage Results" MODIFIED="1768628715896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
