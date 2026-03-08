@@ -21,6 +21,11 @@ Thumbs.db
 runs/
 
 # Generated plots
-figures/
+# NOTE: we commit plots under figures/ so they render in GitHub README.
+# Keep ignoring other stray PNGs in the repo root if any.
+!figures/
+!figures/**
+# If you still want to ignore arbitrary pngs elsewhere, keep the global rule.
+# But do NOT ignore figures/*.png.
 *.png
-
+!figures/**/*.png
