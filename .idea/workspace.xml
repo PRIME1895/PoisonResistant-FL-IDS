@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="213e15c2-7a6a-4bff-a539-f912c47af212" name="Changes" comment="Add plotting utilities and update README with usage instructions for generating research-grade figures">
-      <change afterPath="$PROJECT_DIR$/nsl_kdd/client_feedback.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nsl_kdd/local_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/nsl_kdd/local_logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" beforeDir="false" afterPath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" afterDir="false" />
+    <list default="true" id="213e15c2-7a6a-4bff-a539-f912c47af212" name="Changes" comment="Add client feedback module and update README with storage details">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nsl_kdd/compare_runs.py" beforeDir="false" afterPath="$PROJECT_DIR$/nsl_kdd/compare_runs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/split_clients.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/verify_nsl_kdd.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_torch_fl_smoke.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_torch_fl_smoke.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +29,7 @@
     </selectedModels>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="97" />
+    <option name="cachedIndexableFilesCount" value="171" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -111,7 +110,8 @@
       <workItem from="1770739805903" duration="44000" />
       <workItem from="1770739852495" duration="39000" />
       <workItem from="1772806831289" duration="3368000" />
-      <workItem from="1772896531703" duration="1835000" />
+      <workItem from="1772896531703" duration="1885000" />
+      <workItem from="1772936438131" duration="432000" />
     </task>
     <task id="LOCAL-00001" summary="Add project configuration files for Poisoning-Resistant Cross-Layer Federated Intrusion Detection System (FL-IDS)">
       <option name="closed" value="true" />
@@ -217,7 +217,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772898174681</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Add client feedback module and update README with storage details">
+      <option name="closed" value="true" />
+      <created>1772898410464</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1772898410464</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,7 +240,8 @@
     <MESSAGE value="Add local logging for experiment runs and update README with logging details" />
     <MESSAGE value="Update README to clarify research motivation and implementation phases" />
     <MESSAGE value="Add plotting utilities and update README with usage instructions for generating research-grade figures" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add plotting utilities and update README with usage instructions for generating research-grade figures" />
+    <MESSAGE value="Add client feedback module and update README with storage details" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add client feedback module and update README with storage details" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PoisoningResistant_CrossLayer_Federated_Intrusion_Detection_System__FLIDS_$load_data.coverage" NAME="load_data Coverage Results" MODIFIED="1768628715896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocessing" />
