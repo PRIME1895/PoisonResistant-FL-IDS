@@ -1,0 +1,2 @@
+round,logged_at,accuracy,precision,recall,f1,false_positive_rate,false_negative_rate,tp,fp,tn,fn,loss_stability_mean,cross_layer_mean
+1.0,2026-03-08T08:14:02.820948+00:00,0.5566666666666666,0.5566666666666666,1.0,0.715203426124197,1.0,0.0,835.0,665.0,0.0,0.0,0.9984208296843863,0.7707417635501518

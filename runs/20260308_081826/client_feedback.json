@@ -1,0 +1,560 @@
+[
+  {
+    "round": 1,
+    "logged_at": "2026-03-08T08:18:28.323129+00:00",
+    "clients": [
+      {
+        "client_id": 1,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 2,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 3,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7146110491875926
+      },
+      {
+        "client_id": 4,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 5,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 6,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 7,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 8,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6905155023220639
+      },
+      {
+        "client_id": 9,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 10,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 11,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7539448415062867
+      },
+      {
+        "client_id": 12,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 13,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 14,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7064985557602284
+      },
+      {
+        "client_id": 15,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 16,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 17,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7751366608324438
+      },
+      {
+        "client_id": 18,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 19,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7059990862632844
+      },
+      {
+        "client_id": 20,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 21,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 22,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7724227614357958
+      },
+      {
+        "client_id": 23,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 24,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 25,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7387961250362586
+      },
+      {
+        "client_id": 26,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.8486304069135896
+      },
+      {
+        "client_id": 27,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7111195111028464
+      },
+      {
+        "client_id": 28,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 29,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 30,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "logged_at": "2026-03-08T08:18:29.829546+00:00",
+    "clients": [
+      {
+        "client_id": 1,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 2,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 3,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7146110491875926
+      },
+      {
+        "client_id": 4,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 5,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 6,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 7,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 8,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6905155023220639
+      },
+      {
+        "client_id": 9,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 10,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 11,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7539448415062867
+      },
+      {
+        "client_id": 12,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 13,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 14,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7064985557602284
+      },
+      {
+        "client_id": 15,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 16,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 17,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7751366608324438
+      },
+      {
+        "client_id": 18,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 19,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7059990862632844
+      },
+      {
+        "client_id": 20,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 21,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 22,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7724227614357958
+      },
+      {
+        "client_id": 23,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 24,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 25,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7387961250362586
+      },
+      {
+        "client_id": 26,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.8486304069135896
+      },
+      {
+        "client_id": 27,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7111195111028464
+      },
+      {
+        "client_id": 28,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 29,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 30,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      }
+    ]
+  },
+  {
+    "round": 3,
+    "logged_at": "2026-03-08T08:18:32.194148+00:00",
+    "clients": [
+      {
+        "client_id": 1,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 2,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 3,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7146110491875926
+      },
+      {
+        "client_id": 4,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 5,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 6,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 7,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 8,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6905155023220639
+      },
+      {
+        "client_id": 9,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 10,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 11,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7539448415062867
+      },
+      {
+        "client_id": 12,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 13,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 14,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7064985557602284
+      },
+      {
+        "client_id": 15,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 16,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 17,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7751366608324438
+      },
+      {
+        "client_id": 18,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 19,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7059990862632844
+      },
+      {
+        "client_id": 20,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 21,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 22,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7724227614357958
+      },
+      {
+        "client_id": 23,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 24,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 25,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7387961250362586
+      },
+      {
+        "client_id": 26,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.8486304069135896
+      },
+      {
+        "client_id": 27,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7111195111028464
+      },
+      {
+        "client_id": 28,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 29,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 30,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      }
+    ]
+  }
+]
