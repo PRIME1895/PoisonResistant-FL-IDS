@@ -190,6 +190,19 @@ At minimum, report:
 
 (These aren’t currently printed by the CLI, but they are straightforward to compute from a confusion matrix.)
 
+### Confusion matrix (TP/FP/TN/FN)
+For reports, you often need the **confusion matrix** on `KDDTest+.txt`.
+
+This repo logs the raw confusion-matrix counts **per FL round** into:
+- `runs/<run_id>/rounds.csv`
+- `runs/<run_id>/rounds.json`
+
+Columns/keys:
+- `tp`, `fp`, `tn`, `fn`
+- plus derived `false_positive_rate` and `false_negative_rate`
+
+So you can directly copy the *final round* confusion matrix from the last row of `rounds.csv`.
+
 ---
 
 ## Plots (3 research‑grade figures)

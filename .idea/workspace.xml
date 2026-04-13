@@ -35,21 +35,10 @@
       <change afterPath="$PROJECT_DIR$/data/clients/client_7.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/data/clients/client_8.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/data/clients/client_9.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/comparison/all_round_metrics.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/comparison/all_round_metrics.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/comparison/comparison_accuracy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/comparison/comparison_false_positive_rate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/comparison/comparison_recall.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/comparison/final_round_summary.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/comparison/final_round_summary.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_summary.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_summary_20260306_203909.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_summary_20260307_210555.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_summary_20260308_075930.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_summary_20260308_075950.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_sweep_fpr.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/figures/sweeps/attackers_sweep_recall.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nsl_kdd/confusion_plot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" beforeDir="false" afterPath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/split_clients.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/verify_nsl_kdd.py" beforeDir="false" />
     </list>
@@ -71,7 +60,7 @@
     </selectedModels>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="97" />
+    <option name="cachedIndexableFilesCount" value="159" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -155,7 +144,12 @@
       <workItem from="1772896531703" duration="1885000" />
       <workItem from="1772936438131" duration="456000" />
       <workItem from="1772936933659" duration="1445000" />
-      <workItem from="1772946239038" duration="383000" />
+      <workItem from="1772946239038" duration="2204000" />
+      <workItem from="1773068800628" duration="18000" />
+      <workItem from="1773220113049" duration="1491000" />
+      <workItem from="1773223883447" duration="534000" />
+      <workItem from="1773226012271" duration="711000" />
+      <workItem from="1774274617152" duration="9000" />
     </task>
     <task id="LOCAL-00001" summary="Add project configuration files for Poisoning-Resistant Cross-Layer Federated Intrusion Detection System (FL-IDS)">
       <option name="closed" value="true" />
@@ -301,7 +295,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772946620818</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Add client feedback metrics section to README with extraction instructions">
+      <option name="closed" value="true" />
+      <created>1772946768188</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1772946768188</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

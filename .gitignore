@@ -18,7 +18,10 @@ __pycache__/
 Thumbs.db
 
 # Local run outputs
-runs/
+# NOTE: we now commit `runs/` so experiment results are reproducible.
+# If you want to keep the repo small, consider committing only selected runs
+# (or just aggregated CSV/JSON summaries under `figures/`).
+# runs/
 
 # Generated plots
 # NOTE: we commit plots under figures/ so they render in GitHub README.

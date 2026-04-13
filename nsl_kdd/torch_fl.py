@@ -273,13 +273,19 @@ def evaluate(model: nn.Module, X: pd.DataFrame, y: np.ndarray, *, device: str) -
     probs = 1.0 / (1.0 + np.exp(-logits))
     y_pred = (probs >= 0.5).astype(int)
 
-    # Binary confusion-matrix derived metric.
-    # FPR = FP / (FP + TN). If there are no negatives in y, define FPR=0.
+    # Confusion matrix components
     y_true = y.astype(int)
+    tp = int(np.sum((y_true == 1) & (y_pred == 1)))
     fp = int(np.sum((y_true == 0) & (y_pred == 1)))
     tn = int(np.sum((y_true == 0) & (y_pred == 0)))
-    denom = fp + tn
-    fpr = float(fp / denom) if denom > 0 else 0.0
+    fn = int(np.sum((y_true == 1) & (y_pred == 0)))
+
+    # Derived rates
+    fpr_denom = fp + tn
+    fpr = float(fp / fpr_denom) if fpr_denom > 0 else 0.0
+
+    fnr_denom = fn + tp
+    fnr = float(fn / fnr_denom) if fnr_denom > 0 else 0.0
 
     return {
         "accuracy": float(accuracy_score(y, y_pred)),
@@ -287,6 +293,12 @@ def evaluate(model: nn.Module, X: pd.DataFrame, y: np.ndarray, *, device: str) -
         "recall": float(recall_score(y, y_pred, zero_division=0)),
         "f1": float(f1_score(y, y_pred, zero_division=0)),
         "false_positive_rate": fpr,
+        "false_negative_rate": fnr,
+        # Raw confusion matrix counts (useful for reports)
+        "tp": float(tp),
+        "fp": float(fp),
+        "tn": float(tn),
+        "fn": float(fn),
     }
 
 
@@ -671,4 +683,26 @@ def train_fedavg_binary(
                 pass
 
     final_metrics = history[-1].copy() if history else evaluate(global_model, X_test, y_test, device=config.device)
+
+    # Persist confusion matrix plot(s) for the final round.
+    if local_run is not None:
+        try:
+            from nsl_kdd.confusion_plot import extract_counts_from_metrics, plot_confusion_matrix
+
+            counts = extract_counts_from_metrics(final_metrics)
+            plot_confusion_matrix(
+                counts,
+                out_path=local_run.dir / "confusion_matrix.png",
+                title="Confusion Matrix (Final Round)",
+                normalize=False,
+            )
+            plot_confusion_matrix(
+                counts,
+                out_path=local_run.dir / "confusion_matrix_normalized.png",
+                title="Confusion Matrix (Final Round, Normalized)",
+                normalize=True,
+            )
+        except Exception:
+            pass
+
     return FLResult(metrics=final_metrics, history=history)
