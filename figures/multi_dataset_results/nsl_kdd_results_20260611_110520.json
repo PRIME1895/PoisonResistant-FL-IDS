@@ -1,0 +1,119 @@
+{
+  "dataset": "nsl_kdd",
+  "rounds": 2,
+  "n_clients": 20,
+  "client_size": 800,
+  "experiments": [
+    {
+      "aggregation": "fedavg",
+      "n_attackers": 5,
+      "malicious_clients": [
+        9,
+        14,
+        16,
+        17,
+        18
+      ],
+      "recall": 0.5926127951375361,
+      "false_positive_rate": 0.580475749150448,
+      "accuracy": 0.5180535841022001,
+      "f1": 0.5833173537871524,
+      "precision": 0.5743090167648391
+    },
+    {
+      "aggregation": "fedavg",
+      "n_attackers": 10,
+      "malicious_clients": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        14,
+        19
+      ],
+      "recall": 0.5926127951375361,
+      "false_positive_rate": 0.580475749150448,
+      "accuracy": 0.5180535841022001,
+      "f1": 0.5833173537871524,
+      "precision": 0.5743090167648391
+    },
+    {
+      "aggregation": "trimmed_mean",
+      "n_attackers": 5,
+      "malicious_clients": [
+        9,
+        14,
+        16,
+        17,
+        18
+      ],
+      "recall": 0.5926127951375361,
+      "false_positive_rate": 0.580475749150448,
+      "accuracy": 0.5180535841022001,
+      "f1": 0.5833173537871524,
+      "precision": 0.5743090167648391
+    },
+    {
+      "aggregation": "trimmed_mean",
+      "n_attackers": 10,
+      "malicious_clients": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        14,
+        19
+      ],
+      "recall": 0.5926127951375361,
+      "false_positive_rate": 0.580475749150448,
+      "accuracy": 0.5180535841022001,
+      "f1": 0.5833173537871524,
+      "precision": 0.5743090167648391
+    },
+    {
+      "aggregation": "cosine",
+      "n_attackers": 5,
+      "malicious_clients": [
+        9,
+        14,
+        16,
+        17,
+        18
+      ],
+      "recall": 0.5926127951375361,
+      "false_positive_rate": 0.580475749150448,
+      "accuracy": 0.5180535841022001,
+      "f1": 0.5833173537871524,
+      "precision": 0.5743090167648391
+    },
+    {
+      "aggregation": "cosine",
+      "n_attackers": 10,
+      "malicious_clients": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        14,
+        19
+      ],
+      "recall": 0.5926127951375361,
+      "false_positive_rate": 0.580475749150448,
+      "accuracy": 0.5180535841022001,
+      "f1": 0.5833173537871524,
+      "precision": 0.5743090167648391
+    }
+  ]
+}

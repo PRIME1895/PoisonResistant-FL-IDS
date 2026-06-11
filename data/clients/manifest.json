@@ -305,7 +305,7 @@
     }
   ],
   "source": "KDDTrain+.txt",
-  "output_dir": "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/data/clients_30",
+  "output_dir": "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/data/clients",
   "clients": {
     "client_1": {
       "rows": 2000,

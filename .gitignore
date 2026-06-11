@@ -32,3 +32,6 @@ Thumbs.db
 # But do NOT ignore figures/*.png.
 *.png
 !figures/**/*.png
+CICIDS2017/
+UNSW/
+*.csv

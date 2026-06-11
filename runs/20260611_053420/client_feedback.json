@@ -1,0 +1,743 @@
+[
+  {
+    "round": 1,
+    "logged_at": "2026-06-11T05:34:21.196259+00:00",
+    "clients": [
+      {
+        "client_id": 1,
+        "used": true,
+        "trust": 0.7868183070999593,
+        "cosine_similarity": 0.4676504694168779,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 2,
+        "used": true,
+        "trust": 0.9275915886998334,
+        "cosine_similarity": 0.7103663547993334,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 3,
+        "used": true,
+        "trust": 0.8071877288749065,
+        "cosine_similarity": 0.5491281565166669,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 4,
+        "used": true,
+        "trust": 0.860529070919755,
+        "cosine_similarity": 0.7033201586427612,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7387961250362586
+      },
+      {
+        "client_id": 5,
+        "used": true,
+        "trust": 0.876232690978851,
+        "cosine_similarity": 0.5049307639154043,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 6,
+        "used": true,
+        "trust": 0.7609057408347096,
+        "cosine_similarity": 0.3640002043558793,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 7,
+        "used": true,
+        "trust": 0.9284420162856307,
+        "cosine_similarity": 0.7137680651425228,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 8,
+        "used": true,
+        "trust": 0.7857396455790714,
+        "cosine_similarity": 0.4633358233333261,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 9,
+        "used": true,
+        "trust": 0.859644682281531,
+        "cosine_similarity": 0.6997826040898655,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7387961250362586
+      },
+      {
+        "client_id": 10,
+        "used": true,
+        "trust": 0.8870723958229985,
+        "cosine_similarity": 0.7604997036815784,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7877898796104158
+      },
+      {
+        "client_id": 11,
+        "used": true,
+        "trust": 0.7898554484964975,
+        "cosine_similarity": 0.47979903500303067,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 12,
+        "used": true,
+        "trust": 0.9496528436976305,
+        "cosine_similarity": 0.7986113747905219,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 13,
+        "used": true,
+        "trust": 0.8123003334184018,
+        "cosine_similarity": 0.5695785746906477,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 14,
+        "used": true,
+        "trust": 0.9003284467742398,
+        "cosine_similarity": 0.8582042601057546,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7431095269912047
+      },
+      {
+        "client_id": 15,
+        "used": true,
+        "trust": 0.8183336484919503,
+        "cosine_similarity": 0.593711834984842,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 16,
+        "used": true,
+        "trust": 0.7713987985689027,
+        "cosine_similarity": 0.37680621504677386,
+        "loss_stability": 1.0,
+        "cross_layer": 0.708788979228837
+      },
+      {
+        "client_id": 17,
+        "used": true,
+        "trust": 0.9436079704999251,
+        "cosine_similarity": 0.7744318819997001,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 18,
+        "used": true,
+        "trust": 0.8353804571224084,
+        "cosine_similarity": 0.6618990695066744,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 19,
+        "used": true,
+        "trust": 0.9025514042949281,
+        "cosine_similarity": 0.8493267695456812,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 20,
+        "used": true,
+        "trust": 0.8691733332647489,
+        "cosine_similarity": 0.797070574076036,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 21,
+        "used": false,
+        "trust": 0.7499113605807263,
+        "cosine_similarity": 0.2891323660491852,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7105130762737198,
+        "notes": "dropped_by_server"
+      },
+      {
+        "client_id": 22,
+        "used": true,
+        "trust": 0.948537501462428,
+        "cosine_similarity": 0.7941500058497121,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 23,
+        "used": true,
+        "trust": 0.8244130912353993,
+        "cosine_similarity": 0.618029605958638,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 24,
+        "used": true,
+        "trust": 0.9051992905638766,
+        "cosine_similarity": 0.8599183146214753,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 25,
+        "used": true,
+        "trust": 0.8446669762623314,
+        "cosine_similarity": 0.6990451460663664,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 26,
+        "used": true,
+        "trust": 0.8077455322714481,
+        "cosine_similarity": 0.551359370102833,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 27,
+        "used": true,
+        "trust": 0.9457039781257337,
+        "cosine_similarity": 0.7828159125029347,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 28,
+        "used": true,
+        "trust": 0.8309001000044203,
+        "cosine_similarity": 0.6439776410347215,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 29,
+        "used": true,
+        "trust": 0.8732802838885265,
+        "cosine_similarity": 0.7322422879200747,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 30,
+        "used": true,
+        "trust": 0.8599985091129736,
+        "cosine_similarity": 0.760371277468935,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "logged_at": "2026-06-11T05:34:22.032441+00:00",
+    "clients": [
+      {
+        "client_id": 1,
+        "used": true,
+        "trust": 0.7847302502539564,
+        "cosine_similarity": 0.4592982420328659,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 2,
+        "used": true,
+        "trust": 0.9241580428468623,
+        "cosine_similarity": 0.6966321713874492,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 3,
+        "used": true,
+        "trust": 0.8082758859957087,
+        "cosine_similarity": 0.5534807849998752,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 4,
+        "used": true,
+        "trust": 0.8652794547625333,
+        "cosine_similarity": 0.7223216940138749,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7387961250362586
+      },
+      {
+        "client_id": 5,
+        "used": true,
+        "trust": 0.8796884687441422,
+        "cosine_similarity": 0.5187538749765688,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 6,
+        "used": true,
+        "trust": 0.7760102906004955,
+        "cosine_similarity": 0.42441840341902304,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 7,
+        "used": true,
+        "trust": 0.9272314470935018,
+        "cosine_similarity": 0.7089257883740073,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 8,
+        "used": true,
+        "trust": 0.8041310812378726,
+        "cosine_similarity": 0.536901565968531,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 9,
+        "used": true,
+        "trust": 0.8643555681387624,
+        "cosine_similarity": 0.7186261475187911,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7387961250362586
+      },
+      {
+        "client_id": 10,
+        "used": true,
+        "trust": 0.8952861193342545,
+        "cosine_similarity": 0.7933545977266026,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7877898796104158
+      },
+      {
+        "client_id": 11,
+        "used": true,
+        "trust": 0.787541428517623,
+        "cosine_similarity": 0.4705429550875327,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 12,
+        "used": true,
+        "trust": 0.9406735405658099,
+        "cosine_similarity": 0.7626941622632396,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 13,
+        "used": true,
+        "trust": 0.827856680179551,
+        "cosine_similarity": 0.6318039617352451,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 14,
+        "used": true,
+        "trust": 0.9020191012092451,
+        "cosine_similarity": 0.8649668778457755,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7431095269912047
+      },
+      {
+        "client_id": 15,
+        "used": true,
+        "trust": 0.8078640914035164,
+        "cosine_similarity": 0.5518336066311066,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 16,
+        "used": false,
+        "trust": 0.755101652378563,
+        "cosine_similarity": 0.31161763028541517,
+        "loss_stability": 1.0,
+        "cross_layer": 0.708788979228837,
+        "notes": "dropped_by_server"
+      },
+      {
+        "client_id": 17,
+        "used": true,
+        "trust": 0.947706918118699,
+        "cosine_similarity": 0.7908276724747962,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 18,
+        "used": true,
+        "trust": 0.8325795668465804,
+        "cosine_similarity": 0.6506955084033624,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 19,
+        "used": true,
+        "trust": 0.9066902062390054,
+        "cosine_similarity": 0.8658819773219902,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 20,
+        "used": true,
+        "trust": 0.8698965983659785,
+        "cosine_similarity": 0.7999636344809548,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 21,
+        "used": true,
+        "trust": 0.7781332496418327,
+        "cosine_similarity": 0.40201992229361094,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7105130762737198
+      },
+      {
+        "client_id": 22,
+        "used": true,
+        "trust": 0.9504507749315318,
+        "cosine_similarity": 0.8018030997261275,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 23,
+        "used": true,
+        "trust": 0.8243002051595054,
+        "cosine_similarity": 0.6175780616550621,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 24,
+        "used": true,
+        "trust": 0.9029358734116089,
+        "cosine_similarity": 0.8508646460124042,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 25,
+        "used": true,
+        "trust": 0.8611165960927231,
+        "cosine_similarity": 0.764843625387933,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 26,
+        "used": true,
+        "trust": 0.8044106296581319,
+        "cosine_similarity": 0.5380197596495683,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 27,
+        "used": true,
+        "trust": 0.946157808201461,
+        "cosine_similarity": 0.7846312328058438,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 28,
+        "used": true,
+        "trust": 0.8356834072339605,
+        "cosine_similarity": 0.6631108699528828,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 29,
+        "used": true,
+        "trust": 0.8753397408952456,
+        "cosine_similarity": 0.740480115946951,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 30,
+        "used": true,
+        "trust": 0.8620404254029703,
+        "cosine_similarity": 0.7685389426289218,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      }
+    ]
+  },
+  {
+    "round": 3,
+    "logged_at": "2026-06-11T05:34:22.808579+00:00",
+    "clients": [
+      {
+        "client_id": 1,
+        "used": true,
+        "trust": 0.7666618633675202,
+        "cosine_similarity": 0.3870246944871211,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 2,
+        "used": true,
+        "trust": 0.9236619295802423,
+        "cosine_similarity": 0.6946477183209692,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 3,
+        "used": true,
+        "trust": 0.8114211711030634,
+        "cosine_similarity": 0.5660619254292945,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 4,
+        "used": true,
+        "trust": 0.868778975855959,
+        "cosine_similarity": 0.7363197783875772,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7387961250362586
+      },
+      {
+        "client_id": 5,
+        "used": true,
+        "trust": 0.8767004795825081,
+        "cosine_similarity": 0.5068019183300324,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 6,
+        "used": true,
+        "trust": 0.7794301315001841,
+        "cosine_similarity": 0.43809776701777736,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 7,
+        "used": true,
+        "trust": 0.9329974274099742,
+        "cosine_similarity": 0.7319897096398964,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 8,
+        "used": true,
+        "trust": 0.8009242443313899,
+        "cosine_similarity": 0.5240742183426,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 9,
+        "used": true,
+        "trust": 0.8656059543162327,
+        "cosine_similarity": 0.723627692228672,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7387961250362586
+      },
+      {
+        "client_id": 10,
+        "used": true,
+        "trust": 0.898130491718854,
+        "cosine_similarity": 0.8047320872650002,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7877898796104158
+      },
+      {
+        "client_id": 11,
+        "used": true,
+        "trust": 0.7905025466701563,
+        "cosine_similarity": 0.4823874276976659,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 12,
+        "used": true,
+        "trust": 0.9459837366572069,
+        "cosine_similarity": 0.7839349466288276,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 13,
+        "used": true,
+        "trust": 0.8313005860230342,
+        "cosine_similarity": 0.6455795851091778,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 14,
+        "used": true,
+        "trust": 0.9027332095365501,
+        "cosine_similarity": 0.8678233111549956,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7431095269912047
+      },
+      {
+        "client_id": 15,
+        "used": true,
+        "trust": 0.8606396772714737,
+        "cosine_similarity": 0.7629359501029357,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 16,
+        "used": false,
+        "trust": 0.7696349603158801,
+        "cosine_similarity": 0.36975086203468355,
+        "loss_stability": 1.0,
+        "cross_layer": 0.708788979228837,
+        "notes": "dropped_by_server"
+      },
+      {
+        "client_id": 17,
+        "used": true,
+        "trust": 0.9479471984787575,
+        "cosine_similarity": 0.7917887939150299,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 18,
+        "used": true,
+        "trust": 0.8350384239484785,
+        "cosine_similarity": 0.6605309368109549,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 19,
+        "used": true,
+        "trust": 0.9055773713151998,
+        "cosine_similarity": 0.8614306376267677,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 20,
+        "used": true,
+        "trust": 0.8633333499439367,
+        "cosine_similarity": 0.7737106407927875,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 21,
+        "used": true,
+        "trust": 0.7974615319425434,
+        "cosine_similarity": 0.47933305149645405,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7105130762737198
+      },
+      {
+        "client_id": 22,
+        "used": true,
+        "trust": 0.9483829164176645,
+        "cosine_similarity": 0.793531665670658,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 23,
+        "used": true,
+        "trust": 0.8262850717351334,
+        "cosine_similarity": 0.6255175279575744,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 24,
+        "used": true,
+        "trust": 0.9039237422800568,
+        "cosine_similarity": 0.8548161214861959,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 25,
+        "used": true,
+        "trust": 0.8507728271492969,
+        "cosine_similarity": 0.7234685496142285,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 26,
+        "used": true,
+        "trust": 0.7980666361794534,
+        "cosine_similarity": 0.5126437857348541,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 27,
+        "used": true,
+        "trust": 0.9458963121797088,
+        "cosine_similarity": 0.7835852487188351,
+        "loss_stability": 1.0,
+        "cross_layer": 1.0
+      },
+      {
+        "client_id": 28,
+        "used": true,
+        "trust": 0.8319494731088698,
+        "cosine_similarity": 0.6481751334525198,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      },
+      {
+        "client_id": 29,
+        "used": true,
+        "trust": 0.8728946974788279,
+        "cosine_similarity": 0.7306999422812803,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 30,
+        "used": true,
+        "trust": 0.8646995351288829,
+        "cosine_similarity": 0.7791753815325719,
+        "loss_stability": 1.0,
+        "cross_layer": 0.6796227589829592
+      }
+    ]
+  }
+]

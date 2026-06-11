@@ -1,0 +1,119 @@
+{
+  "dataset": "unsw",
+  "rounds": 1,
+  "n_clients": 10,
+  "client_size": 500,
+  "experiments": [
+    {
+      "aggregation": "fedavg",
+      "n_attackers": 5,
+      "malicious_clients": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "recall": 0.9447533662976714,
+      "false_positive_rate": 0.0,
+      "accuracy": 0.9447533662976714,
+      "f1": 0.9715919588263757,
+      "precision": 1.0
+    },
+    {
+      "aggregation": "fedavg",
+      "n_attackers": 10,
+      "malicious_clients": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "recall": 0.9447533662976714,
+      "false_positive_rate": 0.0,
+      "accuracy": 0.9447533662976714,
+      "f1": 0.9715919588263757,
+      "precision": 1.0
+    },
+    {
+      "aggregation": "trimmed_mean",
+      "n_attackers": 5,
+      "malicious_clients": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "recall": 0.9447533662976714,
+      "false_positive_rate": 0.0,
+      "accuracy": 0.9447533662976714,
+      "f1": 0.9715919588263757,
+      "precision": 1.0
+    },
+    {
+      "aggregation": "trimmed_mean",
+      "n_attackers": 10,
+      "malicious_clients": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "recall": 0.9447533662976714,
+      "false_positive_rate": 0.0,
+      "accuracy": 0.9447533662976714,
+      "f1": 0.9715919588263757,
+      "precision": 1.0
+    },
+    {
+      "aggregation": "cosine",
+      "n_attackers": 5,
+      "malicious_clients": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "recall": 0.9447533662976714,
+      "false_positive_rate": 0.0,
+      "accuracy": 0.9447533662976714,
+      "f1": 0.9715919588263757,
+      "precision": 1.0
+    },
+    {
+      "aggregation": "cosine",
+      "n_attackers": 10,
+      "malicious_clients": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "recall": 0.9447533662976714,
+      "false_positive_rate": 0.0,
+      "accuracy": 0.9447533662976714,
+      "f1": 0.9715919588263757,
+      "precision": 1.0
+    }
+  ]
+}

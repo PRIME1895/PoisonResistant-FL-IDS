@@ -1,0 +1,157 @@
+
+================================================================================
+Starting experiments for NSL_KDD dataset
+================================================================================
+
+[1/4] Loading NSL_KDD dataset...
+  Train: 125,973 rows, 42 columns
+  Test: 22,544 rows
+  Label distribution: {'normal': 67343, 'neptune': 41214, 'satan': 3633, 'ipsweep': 3599, 'portsweep': 2931, 'smurf': 2646, 'nmap': 1493, 'back': 956, 'teardrop': 892, 'warezclient': 890, 'pod': 201, 'guess_passwd': 53, 'buffer_overflow': 30, 'warezmaster': 20, 'land': 18, 'imap': 11, 'rootkit': 10, 'loadmodule': 9, 'ftp_write': 8, 'multihop': 7, 'phf': 4, 'perl': 3, 'spy': 2}
+
+[2/4] Splitting into 30 non-IID clients...
+  Created 30 clients with 1000 samples each
+
+[3/4] Running experiments with 3 aggregation methods...
+
+  --- Testing FEDAVG aggregation ---
+    Running with 5 attackers (ids: (13, 22, 25)...): Recall=0.9818, FPR=0.9922, Acc=0.5622
+    Running with 10 attackers (ids: (1, 4, 6)...): Recall=0.9818, FPR=0.9922, Acc=0.5622
+
+  --- Testing TRIMMED_MEAN aggregation ---
+    Running with 5 attackers (ids: (13, 22, 25)...): Recall=0.9818, FPR=0.9922, Acc=0.5622
+    Running with 10 attackers (ids: (1, 4, 6)...): Recall=0.9818, FPR=0.9922, Acc=0.5622
+
+  --- Testing COSINE aggregation ---
+    Running with 5 attackers (ids: (13, 22, 25)...): Recall=0.9818, FPR=0.9922, Acc=0.5622
+    Running with 10 attackers (ids: (1, 4, 6)...): Recall=0.9818, FPR=0.9922, Acc=0.5622
+
+[4/4] Saving results...
+  Saved to: /home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/figures/multi_dataset_results/nsl_kdd_results_20260611_110423.json
+
+================================================================================
+Starting experiments for UNSW dataset
+================================================================================
+
+[1/4] Loading UNSW dataset...
+  Train: 82,332 rows, 45 columns
+  Test: 175,341 rows
+  Label distribution: {1: 45332, 0: 37000}
+
+[2/4] Splitting into 30 non-IID clients...
+  Created 30 clients with 1000 samples each
+
+[3/4] Running experiments with 3 aggregation methods...
+
+  --- Testing FEDAVG aggregation ---
+    Running with 5 attackers (ids: (13, 22, 25)...): 
+❌ ERROR processing unsw: Some column names are not columns of the dataframe: {'serror_rate', 'num_compromised', 'srv_serror_rate', 'dst_host_srv_diff_host_rate', 'dst_host_srv_serror_rate', 'dst_host_serror_rate', 'count', 'num_root', 'num_shells', 'root_shell', 'logged_in', 'num_outbound_cmds', 'dst_host_rerror_rate', 'srv_count', 'src_bytes', 'hot', 'num_access_files', 'rerror_rate', 'dst_host_srv_count', 'is_guest_login', 'num_file_creations', 'dst_host_count', 'land', 'urgent', 'is_host_login', 'same_srv_rate', 'diff_srv_rate', 'dst_host_same_srv_rate', 'su_attempted', 'srv_diff_host_rate', 'duration', 'dst_bytes', 'num_failed_logins', 'dst_host_srv_rerror_rate', 'wrong_fragment', 'srv_rerror_rate', 'dst_host_diff_srv_rate', 'dst_host_same_src_port_rate'}
+Traceback (most recent call last):
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/_indexing.py", line 411, in _get_column_indices
+    return [column_names.index(col) for col in selected_columns]
+            ~~~~~~~~~~~~~~~~~~^^^^^
+ValueError: list.index(x): x not in list
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/scripts/run_multi_dataset_experiments.py", line 187, in main
+    results = run_dataset_experiments(
+        dataset_name=dataset,
+    ...<3 lines>...
+        client_size=args.client_size,
+    )
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/scripts/run_multi_dataset_experiments.py", line 133, in run_dataset_experiments
+    result = train_fedavg_binary(client_dfs, test_df, config=cfg)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/nsl_kdd/torch_fl.py", line 394, in train_fedavg_binary
+    X_train_all, y_train_all, prep = fit_preprocess(combined_train)
+                                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/preprocessing/preprocess.py", line 114, in fit_preprocess
+    Xp = preprocessor.fit_transform(X)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/compose/_column_transformer.py", line 971, in fit_transform
+    self._validate_column_callables(X)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/compose/_column_transformer.py", line 526, in _validate_column_callables
+    transformer_to_input_indices[name] = _get_column_indices(X, columns)
+                                         ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/_indexing.py", line 415, in _get_column_indices
+    raise ValueError(msg) from e
+ValueError: Some column names are not columns of the dataframe: {'serror_rate', 'num_compromised', 'srv_serror_rate', 'dst_host_srv_diff_host_rate', 'dst_host_srv_serror_rate', 'dst_host_serror_rate', 'count', 'num_root', 'num_shells', 'root_shell', 'logged_in', 'num_outbound_cmds', 'dst_host_rerror_rate', 'srv_count', 'src_bytes', 'hot', 'num_access_files', 'rerror_rate', 'dst_host_srv_count', 'is_guest_login', 'num_file_creations', 'dst_host_count', 'land', 'urgent', 'is_host_login', 'same_srv_rate', 'diff_srv_rate', 'dst_host_same_srv_rate', 'su_attempted', 'srv_diff_host_rate', 'duration', 'dst_bytes', 'num_failed_logins', 'dst_host_srv_rerror_rate', 'wrong_fragment', 'srv_rerror_rate', 'dst_host_diff_srv_rate', 'dst_host_same_src_port_rate'}
+
+================================================================================
+Starting experiments for CICIDS dataset
+================================================================================
+
+[1/4] Loading CICIDS dataset...
+  Loading Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv...
+  Loading Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv...
+  Loading Friday-WorkingHours-Morning.pcap_ISCX.csv...
+  Loading Monday-WorkingHours.pcap_ISCX.csv...
+  Loading Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv...
+  Loading Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv...
+  Loading Tuesday-WorkingHours.pcap_ISCX.csv...
+  Loading Wednesday-workingHours.pcap_ISCX.csv...
+  Train: 2,264,594 rows, 79 columns
+  Test: 566,149 rows
+  Label distribution: {0: 1899232, 1: 365362}
+
+[2/4] Splitting into 30 non-IID clients...
+  Created 30 clients with 1000 samples each
+
+[3/4] Running experiments with 3 aggregation methods...
+
+  --- Testing FEDAVG aggregation ---
+    Running with 5 attackers (ids: (13, 22, 25)...): 
+❌ ERROR processing cicids: Some column names are not columns of the dataframe: {'protocol_type', 'service', 'flag'}
+Traceback (most recent call last):
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/_indexing.py", line 411, in _get_column_indices
+    return [column_names.index(col) for col in selected_columns]
+            ~~~~~~~~~~~~~~~~~~^^^^^
+ValueError: list.index(x): x not in list
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/scripts/run_multi_dataset_experiments.py", line 187, in main
+    results = run_dataset_experiments(
+        dataset_name=dataset,
+    ...<3 lines>...
+        client_size=args.client_size,
+    )
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/scripts/run_multi_dataset_experiments.py", line 133, in run_dataset_experiments
+    result = train_fedavg_binary(client_dfs, test_df, config=cfg)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/nsl_kdd/torch_fl.py", line 394, in train_fedavg_binary
+    X_train_all, y_train_all, prep = fit_preprocess(combined_train)
+                                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/preprocessing/preprocess.py", line 114, in fit_preprocess
+    Xp = preprocessor.fit_transform(X)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/compose/_column_transformer.py", line 971, in fit_transform
+    self._validate_column_callables(X)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/compose/_column_transformer.py", line 526, in _validate_column_callables
+    transformer_to_input_indices[name] = _get_column_indices(X, columns)
+                                         ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/_indexing.py", line 415, in _get_column_indices
+    raise ValueError(msg) from e
+ValueError: Some column names are not columns of the dataframe: {'protocol_type', 'service', 'flag'}
+
+================================================================================
+SUMMARY - All Datasets Complete
+================================================================================
+
+
+NSL_KDD:
+ aggregation  n_attackers   recall  false_positive_rate  accuracy       f1
+      fedavg            5 0.981766             0.992174  0.562234 0.718567
+      fedavg           10 0.981766             0.992174  0.562234 0.718567
+trimmed_mean            5 0.981766             0.992174  0.562234 0.718567
+trimmed_mean           10 0.981766             0.992174  0.562234 0.718567
+      cosine            5 0.981766             0.992174  0.562234 0.718567
+      cosine           10 0.981766             0.992174  0.562234 0.718567

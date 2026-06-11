@@ -1,0 +1,39 @@
+[
+  {
+    "round": 1.0,
+    "logged_at": "2026-06-11T05:30:37.257676+00:00",
+    "accuracy": 0.5566666666666666,
+    "precision": 0.5566666666666666,
+    "recall": 1.0,
+    "f1": 0.715203426124197,
+    "false_positive_rate": 1.0,
+    "false_negative_rate": 0.0,
+    "tp": 835.0,
+    "fp": 665.0,
+    "tn": 0.0,
+    "fn": 0.0,
+    "cosine_sim_min": 0.19191655156849022,
+    "cosine_sim_mean": 0.7328402350421366,
+    "trust_min": 0.7382581563129273,
+    "trust_mean": 0.8755007070691686,
+    "loss_stability_mean": 0.9984208296843863,
+    "cross_layer_mean": 0.7707417635501518,
+    "dropped_clients": 1.0
+  },
+  {
+    "round": 1.0,
+    "logged_at": "2026-06-11T05:30:37.585534+00:00",
+    "accuracy": 0.5566666666666666,
+    "precision": 0.5566666666666666,
+    "recall": 1.0,
+    "f1": 0.715203426124197,
+    "false_positive_rate": 1.0,
+    "false_negative_rate": 0.0,
+    "tp": 835.0,
+    "fp": 665.0,
+    "tn": 0.0,
+    "fn": 0.0,
+    "loss_stability_mean": 0.9984208296843863,
+    "cross_layer_mean": 0.7707417635501518
+  }
+]

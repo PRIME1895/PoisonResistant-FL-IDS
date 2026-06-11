@@ -1,0 +1,184 @@
+
+================================================================================
+Starting experiments for NSL_KDD dataset
+================================================================================
+
+[1/4] Loading NSL_KDD dataset...
+  Train: 125,973 rows, 42 columns
+  Test: 22,544 rows
+  Label distribution: {'normal': 67343, 'neptune': 41214, 'satan': 3633, 'ipsweep': 3599, 'portsweep': 2931, 'smurf': 2646, 'nmap': 1493, 'back': 956, 'teardrop': 892, 'warezclient': 890, 'pod': 201, 'guess_passwd': 53, 'buffer_overflow': 30, 'warezmaster': 20, 'land': 18, 'imap': 11, 'rootkit': 10, 'loadmodule': 9, 'ftp_write': 8, 'multihop': 7, 'phf': 4, 'perl': 3, 'spy': 2}
+
+[2/4] Splitting into 15 non-IID clients...
+  Created 15 clients with 1000 samples each
+
+[3/4] Running experiments with 3 aggregation methods...
+
+  --- Testing FEDAVG aggregation ---
+    Running with 5 attackers (ids: (7, 10, 11)...): Recall=0.0918, FPR=0.5215, Acc=0.2584
+    Running with 10 attackers (ids: (1, 2, 3)...): Recall=0.0918, FPR=0.5215, Acc=0.2584
+
+  --- Testing TRIMMED_MEAN aggregation ---
+    Running with 5 attackers (ids: (7, 10, 11)...): Recall=0.0918, FPR=0.5215, Acc=0.2584
+    Running with 10 attackers (ids: (1, 2, 3)...): Recall=0.0918, FPR=0.5215, Acc=0.2584
+
+  --- Testing COSINE aggregation ---
+    Running with 5 attackers (ids: (7, 10, 11)...): Recall=0.0918, FPR=0.5215, Acc=0.2584
+    Running with 10 attackers (ids: (1, 2, 3)...): Recall=0.0918, FPR=0.5215, Acc=0.2584
+
+[4/4] Saving results...
+  Saved to: /home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/figures/multi_dataset_results/nsl_kdd_results_20260611_111106.json
+
+================================================================================
+Starting experiments for UNSW dataset
+================================================================================
+
+[1/4] Loading UNSW dataset...
+  Train: 82,332 rows, 45 columns
+  Test: 175,341 rows
+  Label distribution: {1: 45332, 0: 37000}
+
+[2/4] Splitting into 15 non-IID clients...
+  Created 15 clients with 1000 samples each
+
+[3/4] Running experiments with 3 aggregation methods...
+
+  --- Testing FEDAVG aggregation ---
+    Running with 5 attackers (ids: (7, 10, 11)...): Recall=0.9777, FPR=0.0000, Acc=0.9777
+    Running with 10 attackers (ids: (1, 2, 3)...): Recall=0.9777, FPR=0.0000, Acc=0.9777
+
+  --- Testing TRIMMED_MEAN aggregation ---
+    Running with 5 attackers (ids: (7, 10, 11)...): Recall=0.9777, FPR=0.0000, Acc=0.9777
+    Running with 10 attackers (ids: (1, 2, 3)...): Recall=0.9777, FPR=0.0000, Acc=0.9777
+
+  --- Testing COSINE aggregation ---
+    Running with 5 attackers (ids: (7, 10, 11)...): Recall=0.9777, FPR=0.0000, Acc=0.9777
+    Running with 10 attackers (ids: (1, 2, 3)...): Recall=0.9777, FPR=0.0000, Acc=0.9777
+
+[4/4] Saving results...
+  Saved to: /home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/figures/multi_dataset_results/unsw_results_20260611_111115.json
+
+================================================================================
+Starting experiments for CICIDS dataset
+================================================================================
+
+[1/4] Loading CICIDS dataset...
+  Loading Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv...
+  Loading Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv...
+  Loading Friday-WorkingHours-Morning.pcap_ISCX.csv...
+  Loading Monday-WorkingHours.pcap_ISCX.csv...
+  Loading Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv...
+  Loading Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv...
+  Loading Tuesday-WorkingHours.pcap_ISCX.csv...
+  Loading Wednesday-workingHours.pcap_ISCX.csv...
+  Train: 2,264,594 rows, 79 columns
+  Test: 566,149 rows
+  Label distribution: {0: 1899232, 1: 365362}
+
+[2/4] Splitting into 15 non-IID clients...
+  Created 15 clients with 1000 samples each
+
+[3/4] Running experiments with 3 aggregation methods...
+
+  --- Testing FEDAVG aggregation ---
+    Running with 5 attackers (ids: (7, 10, 11)...): 
+❌ ERROR processing cicids: Input X contains infinity or a value too large for dtype('float64').
+Traceback (most recent call last):
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/scripts/run_multi_dataset_experiments.py", line 187, in main
+    results = run_dataset_experiments(
+        dataset_name=dataset,
+    ...<3 lines>...
+        client_size=args.client_size,
+    )
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/scripts/run_multi_dataset_experiments.py", line 133, in run_dataset_experiments
+    result = train_fedavg_binary(client_dfs, test_df, config=cfg)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/nsl_kdd/torch_fl.py", line 406, in train_fedavg_binary
+    X_test, y_test = transform_with_preprocessor(test_df, prep)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/preprocessing/preprocess.py", line 189, in transform_with_preprocessor
+    Xp = preprocessor.transform(X)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/compose/_column_transformer.py", line 1079, in transform
+    Xs = self._call_func_on_transformers(
+        X,
+    ...<3 lines>...
+        routed_params=routed_params,
+    )
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/compose/_column_transformer.py", line 889, in _call_func_on_transformers
+    return Parallel(n_jobs=self.n_jobs)(jobs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/parallel.py", line 91, in __call__
+    return super().__call__(iterable_with_config_and_warning_filters)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/joblib/parallel.py", line 1986, in __call__
+    return output if self.return_generator else list(output)
+                                                ~~~~^^^^^^^^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/joblib/parallel.py", line 1914, in _get_sequential_output
+    res = func(*args, **kwargs)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/parallel.py", line 184, in __call__
+    return self.function(*args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/pipeline.py", line 1546, in _transform_one
+    res = transformer.transform(X, **params.transform)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/pipeline.py", line 1110, in transform
+    Xt = transform.transform(Xt, **routed_params[name].transform)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/impute/_base.py", line 617, in transform
+    X = self._validate_input(X, in_fit=False)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/impute/_base.py", line 375, in _validate_input
+    raise ve
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/impute/_base.py", line 356, in _validate_input
+    X = validate_data(
+        self,
+    ...<6 lines>...
+        copy=self.copy,
+    )
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/validation.py", line 3038, in validate_data
+    out = check_array(X, input_name="X", **check_params)
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/validation.py", line 1087, in check_array
+    _assert_all_finite(
+    ~~~~~~~~~~~~~~~~~~^
+        array,
+        ^^^^^^
+    ...<2 lines>...
+        allow_nan=ensure_all_finite == "allow-nan",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/validation.py", line 137, in _assert_all_finite
+    _assert_all_finite_element_wise(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        X,
+        ^^
+    ...<4 lines>...
+        input_name=input_name,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/PRIME1895/PycharmProjects/PoisonResistant-FL-IDS/venv/lib/python3.14/site-packages/sklearn/utils/validation.py", line 186, in _assert_all_finite_element_wise
+    raise ValueError(msg_err)
+ValueError: Input X contains infinity or a value too large for dtype('float64').
+
+================================================================================
+SUMMARY - All Datasets Complete
+================================================================================
+
+
+NSL_KDD:
+ aggregation  n_attackers   recall  false_positive_rate  accuracy       f1
+      fedavg            5 0.091795              0.52147  0.258384 0.123512
+      fedavg           10 0.091795              0.52147  0.258384 0.123512
+trimmed_mean            5 0.091795              0.52147  0.258384 0.123512
+trimmed_mean           10 0.091795              0.52147  0.258384 0.123512
+      cosine            5 0.091795              0.52147  0.258384 0.123512
+      cosine           10 0.091795              0.52147  0.258384 0.123512
+
+UNSW:
+ aggregation  n_attackers   recall  false_positive_rate  accuracy       f1
+      fedavg            5 0.977701                  0.0  0.977701 0.988725
+      fedavg           10 0.977701                  0.0  0.977701 0.988725
+trimmed_mean            5 0.977701                  0.0  0.977701 0.988725
+trimmed_mean           10 0.977701                  0.0  0.977701 0.988725
+      cosine            5 0.977701                  0.0  0.977701 0.988725
+      cosine           10 0.977701                  0.0  0.977701 0.988725

@@ -60,8 +60,16 @@ def build_preprocessor(
     numerical_columns: list[str] | None = None,
 ) -> ColumnTransformer:
     """Build a reusable preprocessing transformer (fit on train, transform on test)."""
-    cat_cols = list(categorical_columns or CATEGORICAL_COLUMNS)
-    num_cols = list(numerical_columns or NUMERICAL_COLUMNS)
+    # Use explicit checks instead of "or" to avoid falling back on empty lists
+    if categorical_columns is None:
+        cat_cols = CATEGORICAL_COLUMNS
+    else:
+        cat_cols = list(categorical_columns)
+    
+    if numerical_columns is None:
+        num_cols = NUMERICAL_COLUMNS
+    else:
+        num_cols = list(numerical_columns)
 
     return ColumnTransformer(
         transformers=[
@@ -93,8 +101,14 @@ def build_preprocessor(
         verbose_feature_names_out=False,
     )
 
-def fit_preprocess(train_df: pd.DataFrame) -> tuple[pd.DataFrame, np.ndarray, ColumnTransformer]:
-    """Fit preprocessing on train and return (X_train_processed_df, y_train, fitted_preprocessor)."""
+def fit_preprocess(train_df: pd.DataFrame, cat_cols: list[str] = None, num_cols: list[str] = None) -> tuple[pd.DataFrame, np.ndarray, ColumnTransformer]:
+    """Fit preprocessing on train and return (X_train_processed_df, y_train, fitted_preprocessor).
+    
+    Args:
+        train_df: Training dataframe with 'label' column
+        cat_cols: List of categorical column names. If None, attempts to auto-detect.
+        num_cols: List of numerical column names. If None, attempts to auto-detect.
+    """
     df = train_df.copy()
 
     # Drop difficulty column if present (repo's loader drops `difficulty`, but keep it robust).
@@ -105,10 +119,50 @@ def fit_preprocess(train_df: pd.DataFrame) -> tuple[pd.DataFrame, np.ndarray, Co
 
     y = _binary_labels(df)
     X = df.drop(columns=["label"]).copy()
+    
+    # Handle inf and NaN values early
+    X = X.replace([np.inf, -np.inf], np.nan)
+    X = X.fillna(X.median(numeric_only=True))
 
-    # Only keep columns that exist (safe for alternate schema variants).
-    cat_cols = [c for c in CATEGORICAL_COLUMNS if c in X.columns]
-    num_cols = [c for c in NUMERICAL_COLUMNS if c in X.columns]
+    # Auto-detect columns if not provided
+    if cat_cols is None:
+        # Try to use NSL-KDD defaults, fallback to auto-detection
+        cat_cols = [c for c in CATEGORICAL_COLUMNS if c in X.columns]
+    else:
+        cat_cols = [c for c in cat_cols if c in X.columns]
+    
+    if num_cols is None:
+        # Try to use NSL-KDD defaults, fallback to auto-detection
+        num_cols = [c for c in NUMERICAL_COLUMNS if c in X.columns]
+        
+        # If we didn't find NSL-KDD columns, auto-detect based on dtype
+        if len(num_cols) == 0:
+            num_cols = []
+            for c in X.columns:
+                # Check if column is actually numeric (not just numeric dtype)
+                if X[c].dtype in ['int64', 'float64', 'int32', 'float32', 'int16', 'float16', 'uint8', 'uint16', 'uint32', 'uint64']:
+                    num_cols.append(c)
+    else:
+        num_cols = [c for c in num_cols if c in X.columns]
+    
+    # If still no categorical columns found, try to detect based on dtype
+    if len(cat_cols) == 0:
+        cat_cols = [c for c in X.columns if X[c].dtype == 'object' or X[c].dtype.name == 'category']
+    
+    # Ensure we have at least some columns
+    all_cols = set(cat_cols + num_cols)
+    missing_cols = set(X.columns) - all_cols
+    
+    if len(missing_cols) > 0:
+        # Try to infer type for missing columns
+        for c in missing_cols:
+            try:
+                # Try to convert to numeric
+                pd.to_numeric(X[c], errors='raise')
+                num_cols.append(c)
+            except (ValueError, TypeError):
+                # If conversion fails, treat as categorical
+                cat_cols.append(c)
 
     preprocessor = build_preprocessor(cat_cols, num_cols)
     Xp = preprocessor.fit_transform(X)
@@ -131,6 +185,10 @@ def transform_with_preprocessor(
 
     y = _binary_labels(dfx)
     X = dfx.drop(columns=["label"]).copy()
+    
+    # Handle inf and NaN values (important for CICIDS)
+    X = X.replace([np.inf, -np.inf], np.nan)
+    X = X.fillna(X.median(numeric_only=True))
 
     Xp = preprocessor.transform(X)
     feature_names = list(preprocessor.get_feature_names_out())

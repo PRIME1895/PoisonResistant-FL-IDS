@@ -1,0 +1,18 @@
+[
+  {
+    "round": 1.0,
+    "logged_at": "2026-06-11T05:43:14.041748+00:00",
+    "accuracy": 0.9447533662976714,
+    "precision": 1.0,
+    "recall": 0.9447533662976714,
+    "f1": 0.9715919588263757,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.05524663370232861,
+    "tp": 165654.0,
+    "fp": 0.0,
+    "tn": 0.0,
+    "fn": 9687.0,
+    "loss_stability_mean": 1.0,
+    "cross_layer_mean": 0.0
+  }
+]

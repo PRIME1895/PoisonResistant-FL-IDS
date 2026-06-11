@@ -1,0 +1,89 @@
+[
+  {
+    "round": 1,
+    "logged_at": "2026-06-11T05:43:16.182460+00:00",
+    "clients": [
+      {
+        "client_id": 1,
+        "used": true,
+        "trust": 0.7132630987317596,
+        "cosine_similarity": 0.8530523949270388,
+        "loss_stability": 1.0,
+        "cross_layer": 0.0
+      },
+      {
+        "client_id": 2,
+        "used": true,
+        "trust": 0.7007982471947364,
+        "cosine_similarity": 0.8031929887789455,
+        "loss_stability": 1.0,
+        "cross_layer": 0.0
+      },
+      {
+        "client_id": 3,
+        "used": true,
+        "trust": 0.7123271686329941,
+        "cosine_similarity": 0.8493086745319763,
+        "loss_stability": 1.0,
+        "cross_layer": 0.0
+      },
+      {
+        "client_id": 4,
+        "used": true,
+        "trust": 0.6971046485244295,
+        "cosine_similarity": 0.7884185940977182,
+        "loss_stability": 1.0,
+        "cross_layer": 0.0
+      },
+      {
+        "client_id": 5,
+        "used": true,
+        "trust": 0.713674008124854,
+        "cosine_similarity": 0.8546960324994163,
+        "loss_stability": 1.0,
+        "cross_layer": 0.0
+      },
+      {
+        "client_id": 6,
+        "used": false,
+        "trust": 0.6918688836610152,
+        "cosine_similarity": 0.7674755346440609,
+        "loss_stability": 1.0,
+        "cross_layer": 0.0,
+        "notes": "dropped_by_server"
+      },
+      {
+        "client_id": 7,
+        "used": true,
+        "trust": 0.7082813323570555,
+        "cosine_similarity": 0.8331253294282218,
+        "loss_stability": 1.0,
+        "cross_layer": 0.0
+      },
+      {
+        "client_id": 8,
+        "used": true,
+        "trust": 0.7011305385592908,
+        "cosine_similarity": 0.8045221542371632,
+        "loss_stability": 1.0,
+        "cross_layer": 0.0
+      },
+      {
+        "client_id": 9,
+        "used": true,
+        "trust": 0.7007026336683061,
+        "cosine_similarity": 0.8028105346732245,
+        "loss_stability": 1.0,
+        "cross_layer": 0.0
+      },
+      {
+        "client_id": 10,
+        "used": true,
+        "trust": 0.711809691900972,
+        "cosine_similarity": 0.8472387676038882,
+        "loss_stability": 1.0,
+        "cross_layer": 0.0
+      }
+    ]
+  }
+]

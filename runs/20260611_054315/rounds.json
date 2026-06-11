@@ -1,0 +1,23 @@
+[
+  {
+    "round": 1.0,
+    "logged_at": "2026-06-11T05:43:16.376087+00:00",
+    "accuracy": 0.9447533662976714,
+    "precision": 1.0,
+    "recall": 0.9447533662976714,
+    "f1": 0.9715919588263757,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.05524663370232861,
+    "tp": 165654.0,
+    "fp": 0.0,
+    "tn": 0.0,
+    "fn": 9687.0,
+    "cosine_sim_min": 0.7674755346440609,
+    "cosine_sim_mean": 0.8203841005421655,
+    "trust_min": 0.6918688836610152,
+    "trust_mean": 0.7050960251355413,
+    "loss_stability_mean": 1.0,
+    "cross_layer_mean": 0.0,
+    "dropped_clients": 1.0
+  }
+]

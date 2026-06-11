@@ -4,44 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="213e15c2-7a6a-4bff-a539-f912c47af212" name="Changes" comment="Add client feedback metrics section to README with extraction instructions">
-      <change afterPath="$PROJECT_DIR$/data/clients/client_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_10.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_11.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_12.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_13.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_14.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_15.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_16.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_17.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_18.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_19.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_20.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_21.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_22.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_23.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_24.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_25.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_26.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_27.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_28.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_29.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_30.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_4.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_5.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_6.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_7.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_8.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/clients/client_9.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nsl_kdd/confusion_plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" beforeDir="false" afterPath="$PROJECT_DIR$/nsl_kdd/torch_fl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/split_clients.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/verify_nsl_kdd.py" beforeDir="false" />
-    </list>
+    <list default="true" id="213e15c2-7a6a-4bff-a539-f912c47af212" name="Changes" comment="Add client feedback metrics section to README with extraction instructions" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,10 +16,13 @@
       <entry key="_C:/Users/shari/PycharmProjects/PythonProject" value="38K95XWhKS7Tzyns4yIYHooVdvW" />
     </persistenceIdMap>
   </component>
+  <component name="CopilotUserSelectedChatMode">
+    <option name="chatModeId" value="Agent" />
+  </component>
   <component name="CopilotUserSelectedModel">
     <selectedModels>
-      <entry key="chat-panel" value="GPT-5.2" />
-      <entry key="agent-panel" value="GPT-5.2" />
+      <entry key="chat-panel" value="Claude Haiku 4.5" />
+      <entry key="agent-panel" value="Claude Haiku 4.5" />
     </selectedModels>
   </component>
   <component name="EmbeddingIndexingInfo">
@@ -118,8 +84,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-3bd3a6803838-JavaScript-PY-261.22158.41" />
-        <option value="bundled-python-sdk-8c3867224628-b61e75351b1f-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.22158.41" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-PY-261.25134.71" />
+        <option value="bundled-python-sdk-dd045c9c72b6-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.25134.71" />
       </set>
     </attachedChunks>
   </component>
@@ -150,6 +116,7 @@
       <workItem from="1773223883447" duration="534000" />
       <workItem from="1773226012271" duration="711000" />
       <workItem from="1774274617152" duration="9000" />
+      <workItem from="1781153686702" duration="3758000" />
     </task>
     <task id="LOCAL-00001" summary="Add project configuration files for Poisoning-Resistant Cross-Layer Federated Intrusion Detection System (FL-IDS)">
       <option name="closed" value="true" />
@@ -303,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772946768188</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Add client feedback metrics section to README with extraction instructions">
+      <option name="closed" value="true" />
+      <created>1781155727094</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1781155727094</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

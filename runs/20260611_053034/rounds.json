@@ -1,0 +1,34 @@
+[
+  {
+    "round": 1.0,
+    "logged_at": "2026-06-11T05:30:35.794213+00:00",
+    "accuracy": 0.557,
+    "precision": 0.5567783891945973,
+    "recall": 1.0,
+    "f1": 0.7152956298200515,
+    "false_positive_rate": 0.9988726042841037,
+    "false_negative_rate": 0.0,
+    "tp": 1113.0,
+    "fp": 886.0,
+    "tn": 1.0,
+    "fn": 0.0,
+    "loss_stability_mean": 1.0,
+    "cross_layer_mean": 0.7743343636222235
+  },
+  {
+    "round": 2.0,
+    "logged_at": "2026-06-11T05:30:35.977292+00:00",
+    "accuracy": 0.557,
+    "precision": 0.5567783891945973,
+    "recall": 1.0,
+    "f1": 0.7152956298200515,
+    "false_positive_rate": 0.9988726042841037,
+    "false_negative_rate": 0.0,
+    "tp": 1113.0,
+    "fp": 886.0,
+    "tn": 1.0,
+    "fn": 0.0,
+    "loss_stability_mean": 1.0,
+    "cross_layer_mean": 0.7743343636222235
+  }
+]

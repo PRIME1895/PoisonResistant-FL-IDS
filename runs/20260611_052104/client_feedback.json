@@ -1,0 +1,32 @@
+[
+  {
+    "round": 1,
+    "logged_at": "2026-06-11T05:21:05.861116+00:00",
+    "clients": [
+      {
+        "client_id": 1,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7608788476340314
+      },
+      {
+        "client_id": 2,
+        "used": true,
+        "loss_stability": 0.993683318737545,
+        "cross_layer": 0.7674327549456742
+      },
+      {
+        "client_id": 3,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7751366608324438
+      },
+      {
+        "client_id": 4,
+        "used": true,
+        "loss_stability": 1.0,
+        "cross_layer": 0.7795187907884576
+      }
+    ]
+  }
+]
