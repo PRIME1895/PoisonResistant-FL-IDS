@@ -529,6 +529,20 @@ figures/comparison/
 ├── comparison_recall.png                     # Recall comparison
 └── comparison_false_positive_rate.png        # FPR comparison
 
+figures/multi_dataset_comparison/
+├── multi_dataset_cicids_recall.png           # CICIDS Recall vs aggregation
+├── multi_dataset_cicids_fpr.png              # CICIDS FPR vs aggregation
+├── multi_dataset_cicids_accuracy.png         # CICIDS Accuracy vs aggregation
+├── multi_dataset_cicids_f1.png               # CICIDS F1 Score vs aggregation
+├── multi_dataset_cicids_sensitivity_recall.png     # CICIDS Recall vs attackers
+├── multi_dataset_cicids_sensitivity_fpr.png        # CICIDS FPR vs attackers
+├── multi_dataset_unsw_recall.png             # UNSW Recall vs aggregation
+├── multi_dataset_unsw_fpr.png                # UNSW FPR vs aggregation
+├── multi_dataset_unsw_accuracy.png           # UNSW Accuracy vs aggregation
+├── multi_dataset_unsw_f1.png                 # UNSW F1 Score vs aggregation
+├── multi_dataset_unsw_sensitivity_recall.png       # UNSW Recall vs attackers
+└── multi_dataset_unsw_sensitivity_fpr.png         # UNSW FPR vs attackers
+
 runs/20260611_*/
 ├── rounds.csv                                # Per-round metrics
 ├── rounds.json                               # Per-round metrics (JSON)
@@ -536,6 +550,63 @@ runs/20260611_*/
 ├── confusion_matrix.png                      # Confusion matrix
 └── confusion_matrix_normalized.png           # Normalized confusion matrix
 ```
+
+### Multi-Dataset Comparison Plots (CICIDS2017 & UNSW-NB15)
+
+Comprehensive comparison plots have been generated showing the effectiveness of different aggregation methods across the two additional datasets. These plots visualize how FedAvg, Trimmed Mean, and Cosine Trust aggregation methods compare in terms of key IDS metrics.
+
+#### CICIDS2017 Dataset Comparison
+
+**Recall vs Aggregation Method**
+![CICIDS Recall Comparison](./figures/multi_dataset_comparison/multi_dataset_cicids_recall.png)
+
+**False Positive Rate vs Aggregation Method**
+![CICIDS FPR Comparison](./figures/multi_dataset_comparison/multi_dataset_cicids_fpr.png)
+
+**Accuracy vs Aggregation Method**
+![CICIDS Accuracy Comparison](./figures/multi_dataset_comparison/multi_dataset_cicids_accuracy.png)
+
+**F1 Score vs Aggregation Method**
+![CICIDS F1 Comparison](./figures/multi_dataset_comparison/multi_dataset_cicids_f1.png)
+
+**Recall Sensitivity to Attacker Count**
+![CICIDS Recall Sensitivity](./figures/multi_dataset_comparison/multi_dataset_cicids_sensitivity_recall.png)
+
+**FPR Sensitivity to Attacker Count**
+![CICIDS FPR Sensitivity](./figures/multi_dataset_comparison/multi_dataset_cicids_sensitivity_fpr.png)
+
+#### UNSW-NB15 Dataset Comparison
+
+**Recall vs Aggregation Method**
+![UNSW Recall Comparison](./figures/multi_dataset_comparison/multi_dataset_unsw_recall.png)
+
+**False Positive Rate vs Aggregation Method**
+![UNSW FPR Comparison](./figures/multi_dataset_comparison/multi_dataset_unsw_fpr.png)
+
+**Accuracy vs Aggregation Method**
+![UNSW Accuracy Comparison](./figures/multi_dataset_comparison/multi_dataset_unsw_accuracy.png)
+
+**F1 Score vs Aggregation Method**
+![UNSW F1 Comparison](./figures/multi_dataset_comparison/multi_dataset_unsw_f1.png)
+
+**Recall Sensitivity to Attacker Count**
+![UNSW Recall Sensitivity](./figures/multi_dataset_comparison/multi_dataset_unsw_sensitivity_recall.png)
+
+**FPR Sensitivity to Attacker Count**
+![UNSW FPR Sensitivity](./figures/multi_dataset_comparison/multi_dataset_unsw_sensitivity_fpr.png)
+
+#### Generate Comparison Plots
+
+To regenerate these comparison plots from your multi-dataset results:
+
+```bash
+python scripts/plot_multi_dataset_results.py
+```
+
+This script automatically:
+- Loads the latest results files for each dataset
+- Generates comparison visualizations
+- Exports summary CSV tables with aggregated metrics
 
 ### How to Run Multi-Dataset Experiments
 
