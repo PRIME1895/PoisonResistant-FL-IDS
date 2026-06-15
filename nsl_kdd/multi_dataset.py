@@ -70,18 +70,23 @@ def load_cicids(project_root: str | Path, max_samples_per_file: int = None) -> T
         
         nrows = max_samples_per_file if max_samples_per_file else None
         df = pd.read_csv(file_path, nrows=nrows)
+        df.columns = df.columns.astype(str).str.strip()
+        df = df.loc[:, ~df.columns.duplicated()]
         dfs.append(df)
     
     combined_df = pd.concat(dfs, ignore_index=True)
     
-    # Get label column (should be ' Label' in CICIDS2017)
-    label_col = [c for c in combined_df.columns if 'label' in c.lower()][0]
+    # Normalize CICIDS label column and create binary label
+    label_cols = [c for c in combined_df.columns if str(c).strip().lower() == 'label']
+    if not label_cols:
+        raise ValueError("CICIDS dataset does not contain a label column after normalization.")
+    label_col = label_cols[0]
+    combined_df['label'] = (
+        combined_df[label_col].astype(str).str.strip().str.upper() != 'BENIGN'
+    ).astype(int)
     
-    # Convert to binary: 0=BENIGN, 1=ATTACK
-    combined_df['label'] = (combined_df[label_col] != 'BENIGN').astype(int)
-    
-    # Remove original label column
-    combined_df = combined_df.drop(columns=[label_col])
+    if label_col != 'label':
+        combined_df = combined_df.drop(columns=[label_col])
     
     # Split 80/20
     n_train = int(len(combined_df) * 0.8)

@@ -484,12 +484,12 @@ This section presents comprehensive federated learning experiments on **three ma
 
 | Aggregation | # Attackers | Recall | FPR | Accuracy | F1 |
 |---|---|---|---|---|---|
-| **FedAvg** | 5 | 0.0611 | 0.0 | 0.0611 | 0.1152 |
-| **FedAvg** | 10 | 0.0611 | 0.0 | 0.0611 | 0.1152 |
-| **Trimmed Mean** | 5 | 0.0611 | 0.0 | 0.0611 | 0.1152 |
-| **Trimmed Mean** | 10 | 0.0611 | 0.0 | 0.0611 | 0.1152 |
-| **Cosine Trust** | 5 | 0.0611 | 0.0 | 0.0611 | 0.1152 |
-| **Cosine Trust** | 10 | 0.0611 | 0.0 | 0.0611 | 0.1152 |
+| **FedAvg** | 5 | 0.0125 | 0.0838 | 0.6093 | 0.0213 |
+| **FedAvg** | 10 | 0.0125 | 0.0838 | 0.6093 | 0.0213 |
+| **Trimmed Mean** | 5 | 0.0125 | 0.0838 | 0.6093 | 0.0213 |
+| **Trimmed Mean** | 10 | 0.0125 | 0.0838 | 0.6093 | 0.0213 |
+| **Cosine Trust** | 5 | 0.0125 | 0.0838 | 0.6093 | 0.0213 |
+| **Cosine Trust** | 10 | 0.0125 | 0.0838 | 0.6093 | 0.0213 |
 
 **Key Finding**: CICIDS2017 with 79 high-dimensional features requires **10+ rounds** for good convergence. Recommendation: extend experiments with more rounds for realistic performance assessment.
 
@@ -498,7 +498,7 @@ This section presents comprehensive federated learning experiments on **three ma
 #### Dataset Difficulty Ranking
 1. **UNSW-NB15** (Easiest) → 93% recall with 1 round
 2. **NSL-KDD** (Moderate) → 100% recall with 5 rounds
-3. **CICIDS2017** (Hardest) → 6% recall with 1 round (needs more rounds)
+3. **CICIDS2017** (Hardest) → 1.25% recall with 1 round (needs more rounds)
 
 #### Defense Mechanism Comparison
 | Defense Method | Mechanism | Best For | Key Advantage |

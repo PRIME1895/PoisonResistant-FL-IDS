@@ -50,10 +50,20 @@ NUMERICAL_COLUMNS = [
 
 def _binary_labels(df: pd.DataFrame) -> np.ndarray:
     if "label" not in df.columns:
-        raise ValueError("Expected a 'label' column in the NSL-KDD data.")
-    # Normalize just in case: strip whitespace and trailing '.' (dataset sometimes has 'normal.')
-    y_raw = df["label"].astype(str).str.strip().str.rstrip(".")
-    return (y_raw != "normal").astype(int).to_numpy()
+        raise ValueError("Expected a 'label' column in the data.")
+
+    y = df["label"]
+    if pd.api.types.is_bool_dtype(y):
+        return y.astype(int).to_numpy()
+
+    if pd.api.types.is_numeric_dtype(y):
+        # Numeric labels: treat 0 as normal/benign, everything else as attack.
+        return (y != 0).astype(int).to_numpy()
+
+    # String labels: normalize common IDS label names.
+    y_raw = y.astype(str).str.strip().str.rstrip(".").str.lower()
+    normal_mask = y_raw.isin({"normal", "benign", "background", "normal."})
+    return (~normal_mask).astype(int).to_numpy()
 
 def build_preprocessor(
     categorical_columns: list[str] | None = None,
