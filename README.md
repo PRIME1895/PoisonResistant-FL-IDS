@@ -654,3 +654,58 @@ python scripts/run_multi_dataset_experiments.py \
 ```powershell
 pytest
 ```
+---
+
+## Serving the model (FastAPI inference server)
+
+The trained global model (the output of `fl-train`) can be served as a REST API using `inference_server.py`, so a flow record can be scored for maliciousness in real time outside the training pipeline.
+
+### Run it
+
+```powershell
+pip install fastapi uvicorn
+uvicorn inference_server:app --host 0.0.0.0 --port 8000
+```
+
+Interactive docs: `http://localhost:8000/docs`
+
+### Configuration
+
+The server reads its settings from environment variables, so no code changes are needed per-dataset:
+
+| Variable | Default | Description |
+|---|---|---|
+| `FLIDS_MODEL_PATH` | `models/global_model.pt` | Path to the trained model checkpoint (`state_dict`) |
+| `FLIDS_FEATURE_DIM` | `41` | Length of the preprocessed feature vector the model expects |
+| `FLIDS_TRUST_THRESHOLD` | `0.5` | Confidence threshold above which a record is flagged malicious |
+
+> **Important:** `FLIDS_FEATURE_DIM` must match the output width of the Phase 3 preprocessing pipeline (one-hot encoded `protocol_type`/`service`/`flag` + scaled numeric columns), not the raw column count — this will differ from the default 41 once one-hot encoding is applied. Check `X_train.shape[1]` after preprocessing to get the exact number.
+
+### Example request
+
+```bash
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"features": [0.12, 0.0, 1.0, 0.0, ...]}'
+```
+
+Response:
+
+```json
+{
+  "malicious": true,
+  "confidence": 0.873,
+  "trust_score": 0.127,
+  "latency_ms": 2.145
+}
+```
+
+A `/predict/batch` endpoint is also available for scoring multiple records in a single call, and `/health` reports model-load status and device (CPU/GPU).
+
+### Saving a checkpoint for serving
+
+After an `fl-train` run, save the final global model's `state_dict` so the server can load it:
+
+```python
+torch.save({"state_dict": global_model.state_dict()}, "models/global_model.pt")
+```
